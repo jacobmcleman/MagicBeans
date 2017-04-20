@@ -5,7 +5,7 @@
 #include <fstream>
 #include <ctime>
 
-#define MAX_MESSAGE_LENGTH 256
+#define MAX_MESSAGE_LENGTH 1024
 static char printbuffer[MAX_MESSAGE_LENGTH];
 
 void RestartLog()

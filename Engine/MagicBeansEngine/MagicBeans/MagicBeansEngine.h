@@ -20,6 +20,11 @@ namespace Beans
     double timeElapsed_;
     WindowManager gameWindow_;
     std::string gameName_;
+
+    //TODO move this to be not here
+    unsigned int shaderProgram;
+    unsigned int VBO;
+    unsigned int VAO;
   };
 
 }

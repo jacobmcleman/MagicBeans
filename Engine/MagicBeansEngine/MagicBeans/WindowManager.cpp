@@ -68,5 +68,8 @@ namespace Beans
   void WindowManager::SwapBuffers()
   {
     glfwSwapBuffers(window_);
+
+    glClearColor(0.2f, 0.8f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
   }
 }
