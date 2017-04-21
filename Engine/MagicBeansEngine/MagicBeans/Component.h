@@ -1,4 +1,6 @@
 #pragma once
+#include "MetaType.h"
+#include "Property.h"
 
 namespace Beans
 {
@@ -8,6 +10,8 @@ namespace Beans
   {
   public:
     Component(GameObject* owner);
+
+    virtual const Utilities::MetaType& GetMetaType() const = 0;
 
     GameObject * const Owner;
   };

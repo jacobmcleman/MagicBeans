@@ -15,10 +15,14 @@ namespace Beans
     bool UpdateWindow();
     void SwapBuffers();
 
+    double GetDeltaTime();
+
   private:
     GLFWwindow* window_;
     int width_;
     int height_;
+
+    double lastFrameTime_;
   };
 
   

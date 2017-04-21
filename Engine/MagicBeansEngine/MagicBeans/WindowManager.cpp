@@ -18,7 +18,7 @@
 namespace Beans
 {
   WindowManager::WindowManager(const std::string& title, int width, int height) :
-    width_(width), height_(height)
+    width_(width), height_(height), lastFrameTime_(0)
   {
     LOG("Creating window manager");
     glfwInit();
@@ -71,5 +71,12 @@ namespace Beans
 
     glClearColor(0.2f, 0.8f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+  }
+  double WindowManager::GetDeltaTime()
+  {
+    double currentFrame = glfwGetTime();
+    double deltaTime = currentFrame - lastFrameTime_;
+    lastFrameTime_ = currentFrame;
+    return deltaTime;
   }
 }

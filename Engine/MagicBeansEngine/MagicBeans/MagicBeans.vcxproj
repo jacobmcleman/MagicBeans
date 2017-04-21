@@ -171,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="AutoLister.h" />
     <ClInclude Include="BasicShader.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Helpers.h" />
@@ -178,16 +179,21 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MagicBeansEngine.h" />
     <ClInclude Include="MetaType.h" />
+    <ClInclude Include="Property.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MagicBeansEngine.cpp" />
     <ClCompile Include="MetaType.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

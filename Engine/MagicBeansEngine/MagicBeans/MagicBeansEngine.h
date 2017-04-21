@@ -3,6 +3,8 @@
 #include <string>
 #include "WindowManager.h"
 
+#include "GameObject.h"
+
 namespace Beans
 {
   // This is an example of a class exported from the MagicBeansEngine.lib
@@ -21,10 +23,7 @@ namespace Beans
     WindowManager gameWindow_;
     std::string gameName_;
 
-    //TODO move this to be not here
-    unsigned int shaderProgram;
-    unsigned int VBO;
-    unsigned int VAO;
+    GameObject* cameraObject_;
   };
 
 }
