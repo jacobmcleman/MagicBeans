@@ -16,6 +16,7 @@ namespace Beans
     void SwapBuffers();
 
     double GetDeltaTime();
+    bool IsKeyTriggered(int key);
 
   private:
     GLFWwindow* window_;

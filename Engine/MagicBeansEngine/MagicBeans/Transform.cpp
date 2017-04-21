@@ -9,7 +9,7 @@ namespace Beans
     Component(owner),
     position(vec3(0, 0, 0), [&](const vec3& input)-> vec3 { needsUpdate_ = true; return input; }),
     rotation(0, [&](const float& input)->float { needsUpdate_ = true; return input; }),
-    scale(vec2(0, 0), [&](const vec2& input)->vec2 { needsUpdate_ = true; return input; })
+    scale(vec2(10, 10), [&](const vec2& input)->vec2 { needsUpdate_ = true; return input; })
   {
   }
 

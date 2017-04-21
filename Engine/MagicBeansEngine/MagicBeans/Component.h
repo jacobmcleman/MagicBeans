@@ -1,6 +1,7 @@
 #pragma once
 #include "MetaType.h"
 #include "Property.h"
+#include "AutoLister.h"
 
 namespace Beans
 {
@@ -10,6 +11,7 @@ namespace Beans
   {
   public:
     Component(GameObject* owner);
+    virtual ~Component() {}
 
     virtual const Utilities::MetaType& GetMetaType() const = 0;
 

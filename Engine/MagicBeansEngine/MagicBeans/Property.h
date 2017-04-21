@@ -52,6 +52,23 @@ namespace Beans
       Set(rhs);
     }
 
+    const Property& operator+=(const T& rhs)
+    {
+      data += rhs;
+      return *this;
+    }
+
+    const Property& operator-=(const T& rhs)
+    {
+      data -= rhs;
+      return *this;
+    }
+
+    T operator->()
+    {
+      return data;
+    }
+
   private:
     SetFunction setFunc;
     GetFunction getFunc;

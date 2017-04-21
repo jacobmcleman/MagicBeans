@@ -31,4 +31,4 @@ namespace Beans
     static unsigned int VBO;
     static unsigned int VAO;
   };
-}
+} 

@@ -9,6 +9,9 @@
 #define MAX_LOADSTRING 100
 
 #include "Logger.h"
+#include "TestPlayerController.h"
+
+using namespace Beans;
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -31,7 +34,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     RestartLog();
 
-    Beans::MagicBeansEngine testApp("TestApplication");
+    MagicBeansEngine testApp("TestApplication");
+
+    testApp.RegisterUpdateFunction(PlayerController::UpdatePlayerControllers);
+
+    GameObject* player = testApp.CreateObject("Player");
+    player->AddComponent<PlayerController>();
+
     testApp.RunGameLoop();
 
     return 0;

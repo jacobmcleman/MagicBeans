@@ -27,11 +27,19 @@ namespace Beans
     std::string Name;
     const unsigned long ID;
 
+    void Delete();
+
+    bool isMarkedForDelete();
+
     static unsigned long GetActiveObjects();
+
+    void Swap(GameObject& other);
+
   private:
     std::vector<Component*> components_;
     static unsigned long created_counter;
     static unsigned long instance_count;
+    bool markedForDelete_;
   };
 
 
@@ -83,16 +91,12 @@ namespace Beans
         auto insertAt = components_.begin() + (min);
 
         //Add the component at that position
-        GET_LOCK(components_);
         components_.insert(insertAt, newComp);
-        RELEASE_LOCK(components_);
       }
       else
       {
         //Add the component at the end
-        GET_LOCK(components_);
         components_.insert(components_.end(), newComp);
-        RELEASE_LOCK(components_);
       }
 
       //Give the component back

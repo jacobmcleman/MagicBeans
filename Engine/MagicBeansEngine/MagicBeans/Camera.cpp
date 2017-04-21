@@ -6,7 +6,7 @@ namespace Beans
 {
   INIT_REFLECTION(Camera);
 
-  Camera::Camera(GameObject * owner) : Component(owner)
+  Camera::Camera(GameObject * owner) : Component(owner), size(30, 30)
   {
   }
 
