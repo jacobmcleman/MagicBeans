@@ -12,6 +12,7 @@
 #include "TestPlayerController.h"
 #include "CubeMesh.h"
 #include "LookAtMeComponent.h"
+#include "FPSController.h"
 
 using namespace Beans;
 
@@ -40,6 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     testApp.RegisterUpdateFunction(PlayerController::UpdatePlayerControllers);
     testApp.RegisterUpdateFunction(LookAtMe::UpdateLookAtMes);
+    testApp.RegisterUpdateFunction(FPSController::UpdateFPSControllers);
 
     GameObject* player1 = testApp.CreateObject("Player");
 
@@ -57,17 +59,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     vec3 roomColor(0.9f, 0.9f, 0.9f);
 
     Transform* transform = player1->AddComponent<Transform>();
-    PlayerController* pc = player1->AddComponent<PlayerController>();
-    LookAtMe* lam = player1->AddComponent<LookAtMe>();
-    lam->SetCamera(testApp.GetCamera()->GetComponent<Camera>());
+    //PlayerController* pc = player1->AddComponent<PlayerController>();
+    //LookAtMe* lam = player1->AddComponent<LookAtMe>();
+    //lam->SetCamera(testApp.GetCamera()->GetComponent<Camera>());
     transform->position = glm::vec3(10, 0, floorHeight + (playerScale.z / 2));
     transform->scale = glm::vec3(10, 10, 10);
+    CubeMesh* cube = player1->AddComponent<CubeMesh>();
+    cube->Color = vec3(1, 0.05f, 0.05f);
 
     GameObject* floor = testApp.CreateObject("Floor");
     transform = floor->AddComponent<Transform>();
     transform->position = vec3(0, 0, floorHeight);
     transform->scale = vec3(roomWidth, roomLength, 1);
-    CubeMesh* cube = floor->AddComponent<CubeMesh>();
+    cube = floor->AddComponent<CubeMesh>();
     cube->Color = roomColor;
 
     GameObject* roof = testApp.CreateObject("Roof");
@@ -106,8 +110,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     cube->Color = roomColor;
     
     //transform->rotation = 4.0f;
-
-    testApp.GetCamera()->GetComponent<Transform>()->position = vec3(0, 0, wallCenter);
+    GameObject* cam = testApp.GetCamera();
+    cam->GetComponent<Transform>()->position = vec3(0, 0, wallCenter);
+    cam->AddComponent<FPSController>();
 
     testApp.RunGameLoop();
 

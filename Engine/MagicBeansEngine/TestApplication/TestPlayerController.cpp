@@ -23,8 +23,8 @@ PlayerController::PlayerController(GameObject * owner) : Component(owner)
 
 void PlayerController::Update(double dt)
 {
-  sprite_ = Owner->GetComponent<CubeMesh>();
-  transform_ = Owner->GetComponent<Transform>();
+ // sprite_ = Owner->GetComponent<CubeMesh>();
+ // transform_ = Owner->GetComponent<Transform>();
 
   //Spin?
   //transform_->rotation += static_cast<float>(dt * 0.5);
