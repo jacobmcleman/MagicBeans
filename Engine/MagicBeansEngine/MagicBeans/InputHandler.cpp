@@ -11,6 +11,9 @@ void Beans::InputHandler::KeyCallback(GLFWwindow * window, int key, int scancode
   (void)scancode;
   (void)mods;
 
+  //Just...don't
+  if (key > numKeys_) return;
+
   if (action == GLFW_PRESS)
   {
     keymap[key / keysPerChar_] |= (1 << ((key % keysPerChar_) * bytesPerKey_));

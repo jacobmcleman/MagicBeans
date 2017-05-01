@@ -4,7 +4,7 @@
 #include "Component.h"
 #include "GameObject.h"
 
-#include "Sprite.h"
+#include "CubeMesh.h"
 #include "Transform.h"
 
 #include "InputHandler.h"
@@ -15,16 +15,18 @@ INIT_REFLECTION(PlayerController)
 PlayerController::PlayerController(GameObject * owner) : Component(owner)
 {
   speed = 10;
-  sprite_ = Owner->AddComponent<Sprite>();
+  sprite_ = Owner->AddComponent<CubeMesh>();
   transform_ = Owner->AddComponent<Transform>();
 
-  sprite_->Color = vec4(0, 0, 1, 1);
+  sprite_->Color = vec3(1, 1, 1);
 }
 
 void PlayerController::Update(double dt)
 {
-  sprite_ = Owner->GetComponent<Sprite>();
+  sprite_ = Owner->GetComponent<CubeMesh>();
   transform_ = Owner->GetComponent<Transform>();
+
+  transform_->rotation += static_cast<float>(dt * 0.5);
 
   if (InputHandler::IsKeyDown(GLFW_KEY_LEFT))
   {

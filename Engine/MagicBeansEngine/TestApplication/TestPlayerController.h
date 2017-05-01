@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Transform.h"
-#include "Sprite.h"
+#include "CubeMesh.h"
 
 using namespace Beans;
 
@@ -18,5 +18,5 @@ public:
   double speed;
 private:
   Transform* transform_;
-  Sprite* sprite_;
+  CubeMesh* sprite_;
 };

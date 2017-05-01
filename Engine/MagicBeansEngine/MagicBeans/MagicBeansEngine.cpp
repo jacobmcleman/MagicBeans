@@ -5,6 +5,7 @@
 #include "Logger.h"
 #include "InputHandler.h"
 #include "Sprite.h"
+#include "CubeMesh.h"
 #include "Camera.h"
 
 namespace Beans
@@ -16,6 +17,9 @@ namespace Beans
   {
     //Automatically register sprite's draw functions
     RegisterDrawFunction(Sprite::DrawSprites);
+    RegisterDrawFunction(CubeMesh::DrawSprites);
+
+    SetupRendering();
 
     cameraObject_ = CreateObject("Main Camera");
     cameraObject_->AddComponent<Transform>();
@@ -50,8 +54,13 @@ namespace Beans
 
   GameObject * MagicBeansEngine::CreateObject(const std::string & name)
   {
-    objects_.emplace_back(name);
-    return &objects_.back();
+    objects_.emplace_back(new GameObject(name));
+    return objects_.back();
+  }
+
+  double MagicBeansEngine::GetTimeSinceStartup() const
+  {
+    return timeElapsed_;
   }
 
   GameObject * MagicBeansEngine::GetCamera()
@@ -96,12 +105,20 @@ namespace Beans
     //Find all objects to delete
     for (int i = 0; i < objects_.size(); ++i)
     {
-      if (objects_[i].isMarkedForDelete())
+      if (objects_[i]->isMarkedForDelete())
       {
-        objects_[i].Swap(objects_.back());
+        std::swap(objects_[i], objects_.back());
+        GameObject* deleted = objects_.back();
         objects_.pop_back();
+        delete deleted;
       }
     }
+  }
+
+  void MagicBeansEngine::SetupRendering()
+  {
+    Sprite::InitRendering();
+    CubeMesh::InitRendering(this);
   }
 
 }

@@ -16,8 +16,8 @@ void main()\
 static const char *vertex_shader_text =
 "\
 #version 330 core\n\
-mat4 object_to_world; \
-mat4 world_to_camera; \
+uniform mat4 object_to_world; \
+uniform mat4 world_to_camera; \
 \
 layout(location = 0) in vec3 position;\
 \

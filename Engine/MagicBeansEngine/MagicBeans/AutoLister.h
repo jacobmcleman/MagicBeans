@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <unordered_set>
 
 #ifndef AUTOLISTER_H
 #define AUTOLISTER_H
@@ -13,17 +13,17 @@ namespace Beans
     class AutoLister
     {
     public:
-      static const std::vector<T*>& GetList();
+      static const std::unordered_set<T*>& GetList();
     protected:
       AutoLister();
       ~AutoLister();
 
     private:
-      static std::vector<T*> list;
+      static std::unordered_set<T*> list;
     };
 
     template<typename T>
-    inline const std::vector<T*>& AutoLister<T>::GetList()
+    inline const std::unordered_set<T*>& AutoLister<T>::GetList()
     {
       return list;
     }
@@ -32,27 +32,17 @@ namespace Beans
     inline AutoLister<T>::AutoLister()
     {
       //Add this object to the list
-      list.push_back(reinterpret_cast<T*>(this));
+      list.insert(static_cast<T*>(this));
     }
 
     template<typename T>
     inline AutoLister<T>::~AutoLister()
     {
-      //Find this object in the list
-      for (auto it = list.begin(); it != list.end(); ++it)
-      {
-        //Remove the object from the list
-        if (*it == this)
-        {
-          iter_swap(it, list.end() - 1);
-          list.pop_back();
-          break;
-        }
-      }
+      list.erase(static_cast<T*>(this));
     }
 
     template<typename T>
-    std::vector<T*> AutoLister<T>::list = std::vector<T*>();
+    std::unordered_set<T*> AutoLister<T>::list = std::unordered_set<T*>();
   }
 }
 

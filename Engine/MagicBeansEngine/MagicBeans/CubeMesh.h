@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Component.h"
 #include "AutoLister.h"
 
@@ -7,32 +6,34 @@
 
 #include "Shader.h"
 
-using namespace glm;
 
+using namespace glm;
 
 namespace Beans
 {
-  class Sprite : public Component, protected Utilities::AutoLister<Sprite>
+  class MagicBeansEngine;
+
+  class CubeMesh : public Component, protected Utilities::AutoLister<CubeMesh>
   {
   public:
     REFLECT_CLASS;
 
-    Sprite(GameObject* owner);
-    virtual ~Sprite();
+    CubeMesh(GameObject* owner);
+    virtual ~CubeMesh();
 
     void Draw();
 
-    static void InitRendering();
+    static void InitRendering(MagicBeansEngine* engine);
     static void DrawSprites(const mat4& camTransform);
 
-    vec4 Color;
-  
+    vec3 Color;
+
   private:
     static const float Vertices[];
-    static const unsigned int Indices[];
     static Shader* shaderProgram;
     static unsigned int VBO;
     static unsigned int VAO;
-    static unsigned int EBO;
+
+    static MagicBeansEngine* engine_;
   };
-} 
+}

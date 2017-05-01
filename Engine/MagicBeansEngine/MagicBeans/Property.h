@@ -42,6 +42,11 @@ namespace Beans
       }
     }
 
+    const T& Data() const
+    {
+      return data;
+    }
+
     operator T()
     {
       return Get();
@@ -50,6 +55,7 @@ namespace Beans
     const Property& operator=(const T& rhs)
     {
       Set(rhs);
+      return *this;
     }
 
     const Property& operator+=(const T& rhs)

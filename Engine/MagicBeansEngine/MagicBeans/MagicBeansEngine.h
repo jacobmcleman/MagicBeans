@@ -6,7 +6,6 @@
 #include "GameObject.h"
 #include <functional>
 
-#define GLM_FORCE_CXX11
 #include "GLM\glm.hpp"
 
 namespace Beans
@@ -27,6 +26,8 @@ namespace Beans
 
     GameObject* CreateObject(const std::string& name);
 
+    double GetTimeSinceStartup() const;
+
     GameObject* GetCamera();
 
   private:
@@ -34,13 +35,15 @@ namespace Beans
     void DrawStep();
     void DeleteStep();
 
+    void SetupRendering();
+
     double timeElapsed_;
     WindowManager gameWindow_;
     std::string gameName_;
 
     GameObject* cameraObject_;
 
-    std::vector<GameObject> objects_;
+    std::vector<GameObject*> objects_;
     std::vector<DrawFunction> drawFunctions_;
     std::vector<UpdateFunction> updateFunctions_;
   };

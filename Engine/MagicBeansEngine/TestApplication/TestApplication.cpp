@@ -38,8 +38,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     testApp.RegisterUpdateFunction(PlayerController::UpdatePlayerControllers);
 
-    GameObject* player = testApp.CreateObject("Player");
-    player->AddComponent<PlayerController>();
+    GameObject* player1 = testApp.CreateObject("Player");
+
+    Transform* transform = player1->AddComponent<Transform>();
+    PlayerController* pc = player1->AddComponent<PlayerController>();
+
+    transform->position = glm::vec3(10, 0, 1);
+    transform->scale = glm::vec3(10, 10, 10);
+    //transform->rotation = 4.0f;
+
+    testApp.GetCamera()->GetComponent<Transform>()->position = vec3(0, 20, 55);
 
     testApp.RunGameLoop();
 

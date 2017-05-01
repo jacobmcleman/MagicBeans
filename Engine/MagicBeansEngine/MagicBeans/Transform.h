@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-#define GLM_FORCE_CXX11
 #include <GLM\glm.hpp>
 
 
@@ -17,7 +16,7 @@ namespace Beans
 
     Property<vec3> position;
     Property<float> rotation;
-    Property<vec2> scale;
+    Property<vec3> scale;
 
     const mat4& GetMatrix();
 

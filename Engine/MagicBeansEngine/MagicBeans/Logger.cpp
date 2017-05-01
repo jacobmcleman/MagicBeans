@@ -41,8 +41,11 @@ void LogString(long line, const char * file, const char * function, const std::s
       break;
     }
   }
+
+  std::string fileName = file;
+  fileName = fileName.substr(fileName.find_last_of('\\') + 1);
   
-  sprintf_s(printbuffer, MAX_MESSAGE_LENGTH, "%-32s|%-80s(%4d)|%-50s|%s", timeString, file, line, function, message.c_str());
+  sprintf_s(printbuffer, MAX_MESSAGE_LENGTH, "%-26s|%-24s(%4d)|%-50s|%s", timeString, fileName.c_str(), line, function, message.c_str());
 
   std::cout << printbuffer << std::endl;
 
