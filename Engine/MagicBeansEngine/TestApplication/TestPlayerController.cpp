@@ -18,7 +18,7 @@ PlayerController::PlayerController(GameObject * owner) : Component(owner)
   sprite_ = Owner->AddComponent<CubeMesh>();
   transform_ = Owner->AddComponent<Transform>();
 
-  sprite_->Color = vec3(1, 1, 1);
+  sprite_->Color = vec3(1, 0.05f, 0.05f);
 }
 
 void PlayerController::Update(double dt)
@@ -26,7 +26,8 @@ void PlayerController::Update(double dt)
   sprite_ = Owner->GetComponent<CubeMesh>();
   transform_ = Owner->GetComponent<Transform>();
 
-  transform_->rotation += static_cast<float>(dt * 0.5);
+  //Spin?
+  //transform_->rotation += static_cast<float>(dt * 0.5);
 
   if (InputHandler::IsKeyDown(GLFW_KEY_LEFT))
   {

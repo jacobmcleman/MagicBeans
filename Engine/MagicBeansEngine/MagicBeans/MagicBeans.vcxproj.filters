@@ -72,6 +72,9 @@
     <ClInclude Include="CubeMesh.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="MathFunctions.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MagicBeansEngine.cpp">

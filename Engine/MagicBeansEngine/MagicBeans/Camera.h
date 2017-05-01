@@ -16,8 +16,14 @@ namespace Beans
 
     vec2 size;
 
+    void LookAt(const vec3& position);
+
     void UpdateMatrix();
     const mat4& GetMatrix();
+
+    Property<vec3> LookDirection;
+    Property<vec3> GlobalUp;
+
   private:
     mat4 matrix_;
   };

@@ -70,6 +70,16 @@ namespace Beans
       return *this;
     }
 
+    T operator+(const Property& rhs)
+    {
+      return data + rhs.Data();
+    }
+
+    T operator-(const Property& rhs)
+    {
+      return data - rhs.Data();
+    }
+
     T operator->()
     {
       return data;

@@ -183,6 +183,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MagicBeansEngine.h" />
+    <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="MetaType.h" />
     <ClInclude Include="Property.h" />
     <ClInclude Include="Shader.h" />
