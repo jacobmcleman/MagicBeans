@@ -17,7 +17,7 @@ namespace Beans
     typedef std::function<void(glm::mat4)> DrawFunction;
     typedef std::function<void(double)> UpdateFunction;
 
-    MagicBeansEngine(const std::string& gamename);
+    MagicBeansEngine(const std::string& gamename, CursorMode cursorMode = CursorMode::Normal);
 
     void RunGameLoop();
 

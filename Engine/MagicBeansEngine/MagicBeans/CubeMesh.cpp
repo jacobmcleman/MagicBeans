@@ -117,7 +117,7 @@ namespace Beans
     glBindVertexArray(VAO);
     shaderProgram->SetUniformMat4f("world_to_camera", camTransform);
     shaderProgram->SetUniformVec3f("lightPos", vec3(40 * sinf((float)engine_->GetTimeSinceStartup()), 40 * cosf((float)engine_->GetTimeSinceStartup()), 22.5f));
-    shaderProgram->SetUniformVec3f("viewPos", engine_->GetCamera()->GetComponent<Transform>()->position.Data());
+    shaderProgram->SetUniformVec3f("viewPos", engine_->GetCamera()->GetComponent<Transform>()->position.Get());
 
     for (const auto& cube : GetList())
     {

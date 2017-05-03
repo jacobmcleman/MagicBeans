@@ -18,7 +18,7 @@ namespace Beans
 
     }
 
-    T Get()
+    T Get() const
     {
       if (getFunc != nullptr)
       {
@@ -40,11 +40,6 @@ namespace Beans
       {
         data = value;
       }
-    }
-
-    const T& Data() const
-    {
-      return data;
     }
 
     operator T()
@@ -72,7 +67,7 @@ namespace Beans
 
     T operator+(const Property& rhs)
     {
-      return data + rhs.Data();
+      return data + rhs.Get();
     }
 
     T operator-(const Property& rhs)

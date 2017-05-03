@@ -7,9 +7,25 @@ namespace Beans
 
   Transform::Transform(GameObject * owner) :
     Component(owner),
-    position(vec3(0, 0, 0), [&](const vec3& input)-> vec3 { needsUpdate_ = true; return input; }),
-    rotation(0, [&](const float& input)->float { needsUpdate_ = true; return input; }),
-    scale(vec3(10, 10, 10), [&](const vec3& input)->vec3 { needsUpdate_ = true; return input; })
+    position(vec3(0, 0, 0), 
+      [&](const vec3& input)-> vec3 
+      { 
+        needsUpdate_ = true; 
+        return input; 
+      }),
+    rotation(vec3(0, 0, 0),
+      [&](const vec3& input)->vec3 
+      { 
+        needsUpdate_ = true; 
+        rotation_ = quat(input);
+        return input;
+      }),
+    scale(vec3(10, 10, 10), 
+      [&](const vec3& input)->vec3 
+      { 
+        needsUpdate_ = true; 
+        return input; 
+      })
   {
   }
 
@@ -19,10 +35,18 @@ namespace Beans
     {
       matrix_ = mat4();
       matrix_ = glm::translate(matrix_, static_cast<vec3>(position));
-      matrix_ = glm::rotate(matrix_, static_cast<float>(rotation), vec3(0, 0, 1));
-      matrix_ = glm::scale(matrix_, scale.Data());
+      matrix_ *= rotation_.operator glm::tmat4x4<float, glm::highp>();
+      matrix_ = glm::scale(matrix_, scale.Get());
     }
 
     return matrix_;
+  }
+  void Transform::RotateBy(vec3 eulerAngles)
+  {
+    rotation += eulerAngles;
+  }
+  quat Transform::GetRotationQuaternion() const
+  {
+    return rotation_;
   }
 }

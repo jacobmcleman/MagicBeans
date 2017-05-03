@@ -26,7 +26,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     RestartLog();
 
-    MagicBeansEngine testApp("TestApplication");
+    MagicBeansEngine testApp("TestApplication", CursorMode::Disabled);
 
     testApp.RegisterUpdateFunction(PlayerController::UpdatePlayerControllers);
     testApp.RegisterUpdateFunction(LookAtMe::UpdateLookAtMes);

@@ -18,7 +18,7 @@
 
 namespace Beans
 {
-  WindowManager::WindowManager(const std::string& title, int width, int height) :
+  WindowManager::WindowManager(const std::string& title, CursorMode cursor, int width, int height) :
     width_(width), height_(height), lastFrameTime_(0)
   {
     LOG("Creating window manager");
@@ -51,7 +51,21 @@ namespace Beans
 
     glViewport(0, 0, width_, height_);
 
+    switch (cursor)
+    {
+    case CursorMode::Disabled:
+      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+      break;
+    case CursorMode::Hidden:
+      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+      break;
+    case CursorMode::Normal:
+      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+      break;
+    }
+
     glfwSetKeyCallback(window_, InputHandler::KeyCallback);
+    glfwSetCursorPosCallback(window_, InputHandler::MouseCallback);
 
     LOG("Window created");
   }
@@ -74,6 +88,8 @@ namespace Beans
 
     glClearColor(0.2f, 0.8f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glFrontFace(GL_CCW);
+    glCullFace(GL_BACK);
     //glClear(GL_COLOR_BUFFER_BIT);
   }
   double WindowManager::GetDeltaTime()

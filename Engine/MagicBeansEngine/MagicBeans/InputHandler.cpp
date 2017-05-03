@@ -4,6 +4,11 @@
 #include <GLFW\glfw3.h>
 
 unsigned int Beans::InputHandler::keymap[] = { 0 };
+double Beans::InputHandler::mouse_lastX = 400;
+double Beans::InputHandler::mouse_lastY = 300;
+double Beans::InputHandler::mouse_xMotion = 0;
+double Beans::InputHandler::mouse_yMotion = 0;
+double Beans::InputHandler::mouse_sensitivity = 0.05;
 
 void Beans::InputHandler::KeyCallback(GLFWwindow * window, int key, int scancode, int action, int mods)
 {
@@ -25,6 +30,20 @@ void Beans::InputHandler::KeyCallback(GLFWwindow * window, int key, int scancode
   }
 }
 
+void Beans::InputHandler::MouseCallback(GLFWwindow * window, double xpos, double ypos)
+{
+  (void)window;
+
+  double xChange = xpos - mouse_lastX;
+  double yChange = -(ypos - mouse_lastY); // negative because window coords are upside down
+
+  mouse_lastX = xpos;
+  mouse_lastY = ypos;
+
+  mouse_xMotion = mouse_sensitivity * xChange;
+  mouse_yMotion = mouse_sensitivity * yChange;
+}
+
 void Beans::InputHandler::UpdateInput()
 {
   for (int i = 0; i < numChars_; i++)
@@ -42,4 +61,14 @@ bool Beans::InputHandler::IsKeyDown(int keycode)
 bool Beans::InputHandler::IsKeyTriggered(int keycode)
 {
   return ((keymap[keycode / keysPerChar_]) & (1 << (((keycode % keysPerChar_) * bytesPerKey_) + 1))) != 0;
+}
+
+vec2 Beans::InputHandler::GetMouseMotion()
+{
+  return vec2((float)mouse_xMotion, (float)mouse_yMotion);
+}
+
+void Beans::InputHandler::SetMouseSensitivity(double val)
+{
+  mouse_sensitivity = val;
 }

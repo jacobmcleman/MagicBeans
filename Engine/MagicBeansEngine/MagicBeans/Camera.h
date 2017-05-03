@@ -21,8 +21,8 @@ namespace Beans
     void UpdateMatrix();
     const mat4& GetMatrix();
 
-    Property<vec3> LookDirection;
     Property<vec3> GlobalUp;
+    Property<vec3> LookDirection;
 
   private:
     mat4 matrix_;

@@ -1,5 +1,6 @@
 #pragma once
-
+#include <GLM\glm.hpp>
+using namespace glm;
 
 
 struct GLFWwindow;
@@ -10,10 +11,15 @@ namespace Beans
   {
   public:
     static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
+    static void MouseCallback(GLFWwindow* window, double xpos, double ypos);
     static void UpdateInput();
 
     static bool IsKeyDown(int keycode);
     static bool IsKeyTriggered(int keycode);
+
+    static vec2 GetMouseMotion();
+
+    static void SetMouseSensitivity(double val);
 
   private:
     //Number of keys that need to be tracked
@@ -25,6 +31,11 @@ namespace Beans
     //Number of characters that need to be in the array to hold enough character data
     static constexpr const unsigned int numChars_ = (numKeys_ / keysPerChar_) + 1;
 
+    static double mouse_lastX;
+    static double mouse_lastY;
+    static double mouse_xMotion;
+    static double mouse_yMotion;
+    static double mouse_sensitivity;
     /*
     Using SDL key scancodes as lookup values
 

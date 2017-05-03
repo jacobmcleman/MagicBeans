@@ -6,10 +6,15 @@ struct GLFWwindow;
 
 namespace Beans
 {
+  enum struct CursorMode
+  {
+    Disabled, Hidden, Normal
+  };
+
   class WindowManager
   {
   public:
-    WindowManager(const std::string& title, int width = 800, int height = 600);
+    WindowManager(const std::string& title, CursorMode cursor = CursorMode::Normal, int width = 800, int height = 600);
     ~WindowManager();
 
     bool UpdateWindow();

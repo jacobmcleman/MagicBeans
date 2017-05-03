@@ -17,7 +17,14 @@ public:
 
   double speed;
 
+  bool InvertY = false;
+
 private:
   Transform* transform_;
   Camera* camera_;
+
+  float yaw_;
+  float pitch_;
+
+  const float c_max_pitch_ = 89;
 };

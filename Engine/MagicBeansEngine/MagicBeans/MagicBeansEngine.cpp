@@ -12,8 +12,8 @@ namespace Beans
 {
   // This is the constructor of a class that has been exported.
   // see MagicBeansEngine.h for the class definition
-  MagicBeansEngine::MagicBeansEngine(const std::string& gamename) :
-    gameWindow_(gamename), cameraObject_(nullptr), timeElapsed_(0)
+  MagicBeansEngine::MagicBeansEngine(const std::string& gamename, CursorMode cursorMode) :
+    gameWindow_(gamename, cursorMode, 1920, 1080), cameraObject_(nullptr), timeElapsed_(0)
   {
     //Automatically register sprite's draw functions
     RegisterDrawFunction(Sprite::DrawSprites);
