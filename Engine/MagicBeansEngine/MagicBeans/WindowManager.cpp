@@ -86,7 +86,7 @@ namespace Beans
   {
     glfwSwapBuffers(window_);
 
-    glClearColor(0.2f, 0.8f, 1.0f, 1.0f);
+    glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);

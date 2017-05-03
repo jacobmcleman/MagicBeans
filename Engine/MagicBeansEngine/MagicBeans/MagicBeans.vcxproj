@@ -183,8 +183,10 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MagicBeansEngine.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="MetaType.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Property.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />
@@ -200,7 +202,9 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MagicBeansEngine.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MetaType.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Transform.cpp" />

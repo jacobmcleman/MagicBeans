@@ -8,6 +8,8 @@
 #include "Helpers.h"
 #include "MagicBeansEngine.h"
 
+#include "PointLight.h"
+
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -70,7 +72,7 @@ namespace Beans
   unsigned int CubeMesh::VAO = 0;
   MagicBeansEngine* CubeMesh::engine_ = nullptr;
 
-  CubeMesh::CubeMesh(GameObject* owner) : Component(owner), Color(1, 1, 1)
+  CubeMesh::CubeMesh(GameObject* owner) : Component(owner), material(Material::Plastics::White)
   {
 
   }
@@ -82,7 +84,7 @@ namespace Beans
 
   void CubeMesh::Draw()
   {
-    shaderProgram->SetUniformVec4f("tint", vec4(Color, 1.0f));
+    material.Use(shaderProgram);
     shaderProgram->SetUniformMat4f("object_to_world", Owner->GetComponent<Transform>()->GetMatrix());
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glErrorCheck();
@@ -115,9 +117,14 @@ namespace Beans
   {
     shaderProgram->Use();
     glBindVertexArray(VAO);
+    glErrorCheck();
+
     shaderProgram->SetUniformMat4f("world_to_camera", camTransform);
-    shaderProgram->SetUniformVec3f("lightPos", vec3(40 * sinf((float)engine_->GetTimeSinceStartup()), 40 * cosf((float)engine_->GetTimeSinceStartup()), 22.5f));
     shaderProgram->SetUniformVec3f("viewPos", engine_->GetCamera()->GetComponent<Transform>()->position.Get());
+    glErrorCheck();
+
+    PointLight::SendLightsToShader(shaderProgram);
+    glErrorCheck();
 
     for (const auto& cube : GetList())
     {

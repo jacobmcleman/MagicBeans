@@ -18,7 +18,7 @@ PlayerController::PlayerController(GameObject * owner) : Component(owner)
   sprite_ = Owner->AddComponent<CubeMesh>();
   transform_ = Owner->AddComponent<Transform>();
 
-  sprite_->Color = vec3(1, 0.05f, 0.05f);
+  sprite_->material = Material::Plastics::Red;
 }
 
 void PlayerController::Update(double dt)

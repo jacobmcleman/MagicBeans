@@ -4,6 +4,7 @@
 #include <GLM/gtc/type_ptr.hpp>
 
 #include "Logger.h"
+#include "Helpers.h"
 
 namespace
 {
@@ -91,16 +92,31 @@ void Beans::Shader::Use() const
 void Beans::Shader::SetUniformMat4f(const GLchar * name, const glm::mat4 & matrix) const
 {
   glUniformMatrix4fv(getUniformLoc(name), 1, GL_FALSE, glm::value_ptr(matrix));
+  glErrorCheck();
 }
 
 void Beans::Shader::SetUniformVec4f(const GLchar * name, const glm::vec4 & vector) const
 {
   glUniform4f(getUniformLoc(name), vector.x, vector.y, vector.z, vector.w);
+  glErrorCheck();
 }
 
 void Beans::Shader::SetUniformVec3f(const GLchar * name, const glm::vec3 & vector) const
 {
   glUniform3f(getUniformLoc(name), vector.x, vector.y, vector.z);
+  glErrorCheck();
+}
+
+void Beans::Shader::SetUniformFloat(const GLchar * name, const float & value) const
+{
+  glUniform1f(getUniformLoc(name), value);
+  glErrorCheck();
+}
+
+void Beans::Shader::SetUniformInt(const GLchar * name, const int & value) const
+{
+  glUniform1i(getUniformLoc(name), value);
+  glErrorCheck();
 }
 
 GLuint Beans::Shader::GetShaderProgram() const

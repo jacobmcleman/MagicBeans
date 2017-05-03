@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "AutoLister.h"
+#include "Material.h"
 
 #include "GLM\glm.hpp"
 
@@ -26,7 +27,7 @@ namespace Beans
     static void InitRendering(MagicBeansEngine* engine);
     static void DrawSprites(const mat4& camTransform);
 
-    vec3 Color;
+    Material material;
 
   private:
     static const float Vertices[];

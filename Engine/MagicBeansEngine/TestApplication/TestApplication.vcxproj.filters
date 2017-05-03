@@ -42,6 +42,9 @@
     <ClInclude Include="FPSController.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="IdleMovement.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -57,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FPSController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleMovement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
