@@ -10,7 +10,7 @@ namespace Beans
   {
   public:
     //Constructor is not suggested for use except for maybe serialization and default material setup
-    Material(vec3 ambient, vec3 diffuse, vec3 specular, float shininess);
+    Material(vec3 ambient, vec3 diffuse, vec3 specular, float shininess, vec3 emission);
 
     struct Gems
     {
@@ -39,6 +39,13 @@ namespace Beans
       static Material White;
       static Material Yellow;
     };
+    struct SelfIlluminated
+    {
+      static Material WhiteLight;
+      static Material RedLight;
+      static Material GreenLight;
+      static Material BlueLight;
+    };
 
     void Use(Shader* shader);
 
@@ -47,5 +54,6 @@ namespace Beans
     vec3 diffuse_;
     vec3 specular_;
     float shininess_;
+    vec3 emission_;
   };
 }
