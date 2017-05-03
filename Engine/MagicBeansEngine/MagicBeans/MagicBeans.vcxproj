@@ -196,6 +196,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CubeMesh.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MagicBeansEngine.cpp" />

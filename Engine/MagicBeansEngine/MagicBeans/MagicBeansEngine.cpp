@@ -13,7 +13,7 @@ namespace Beans
   // This is the constructor of a class that has been exported.
   // see MagicBeansEngine.h for the class definition
   MagicBeansEngine::MagicBeansEngine(const std::string& gamename) :
-    gameWindow_(gamename), cameraObject_(nullptr)
+    gameWindow_(gamename), cameraObject_(nullptr), timeElapsed_(0)
   {
     //Automatically register sprite's draw functions
     RegisterDrawFunction(Sprite::DrawSprites);
@@ -71,6 +71,7 @@ namespace Beans
   void MagicBeansEngine::UpdateStep()
   {
     double dt = gameWindow_.GetDeltaTime();
+    timeElapsed_ += dt;
     (void)dt;
     
 

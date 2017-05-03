@@ -14,6 +14,7 @@
 #include <functional>
 
 #include "InputHandler.h"
+#include "Helpers.h"
 
 namespace Beans
 {
@@ -21,11 +22,11 @@ namespace Beans
     width_(width), height_(height), lastFrameTime_(0)
   {
     LOG("Creating window manager");
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwInit(); //glErrorCheck();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //glErrorCheck();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //glErrorCheck();
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //glErrorCheck();
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);//glErrorCheck();
 
     window_ = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
@@ -38,7 +39,7 @@ namespace Beans
 
     glewExperimental = GL_TRUE;
 
-    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST); glErrorCheck();
 
     GLenum initResult = glewInit();
     if (initResult != GLEW_OK)
@@ -73,6 +74,7 @@ namespace Beans
 
     glClearColor(0.2f, 0.8f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT);
   }
   double WindowManager::GetDeltaTime()
   {

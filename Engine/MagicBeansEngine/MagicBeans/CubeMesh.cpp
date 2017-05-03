@@ -5,6 +5,7 @@
 #include "BasicShader.h"
 
 #include "Logger.h"
+#include "Helpers.h"
 #include "MagicBeansEngine.h"
 
 
@@ -84,6 +85,7 @@ namespace Beans
     shaderProgram->SetUniformVec4f("tint", vec4(Color, 1.0f));
     shaderProgram->SetUniformMat4f("object_to_world", Owner->GetComponent<Transform>()->GetMatrix());
     glDrawArrays(GL_TRIANGLES, 0, 36);
+    glErrorCheck();
   }
 
   void CubeMesh::InitRendering(MagicBeansEngine* engine)
@@ -91,19 +93,20 @@ namespace Beans
     LOG("Initializing Cube Rendering");
     shaderProgram = new Shader("Resources/Shaders/basic.frag", "Resources/Shaders/basic.vert");
 
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    glGenVertexArrays(1, &VAO); glErrorCheck();
+    glGenBuffers(1, &VBO); glErrorCheck();
 
     glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(2);
-    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); glErrorCheck();
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW); glErrorCheck();
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0); glErrorCheck();
+    glEnableVertexAttribArray(0); glErrorCheck();
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat))); glErrorCheck();
+    glEnableVertexAttribArray(1); glErrorCheck();
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat))); glErrorCheck();
+    glEnableVertexAttribArray(2); glErrorCheck();
+    glBindVertexArray(0); glErrorCheck();
 
     engine_ = engine;
   }
@@ -113,7 +116,7 @@ namespace Beans
     shaderProgram->Use();
     glBindVertexArray(VAO);
     shaderProgram->SetUniformMat4f("world_to_camera", camTransform);
-    shaderProgram->SetUniformVec3f("lightPos", vec3(20.0f * sinf((float)(engine_->GetTimeSinceStartup())), 0, 14.5f));
+    shaderProgram->SetUniformVec3f("lightPos", vec3(40 * sinf((float)engine_->GetTimeSinceStartup()), 40 * cosf((float)engine_->GetTimeSinceStartup()), 22.5f));
     shaderProgram->SetUniformVec3f("viewPos", engine_->GetCamera()->GetComponent<Transform>()->position.Data());
 
     for (const auto& cube : GetList())
@@ -122,5 +125,6 @@ namespace Beans
     }
 
     glBindVertexArray(0);
+    glErrorCheck();
   }
 }
