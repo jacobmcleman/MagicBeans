@@ -7,6 +7,17 @@
 #include "Sprite.h"
 #include "CubeMesh.h"
 #include "Camera.h"
+#include "JobData.h"
+
+namespace
+{
+  //Struct for the engine to use to send the data to the non-member job function
+  struct EngineRunUpdateJobData
+  {
+    std::vector<JobFunction>* jobs;
+    float dt;
+  };
+}
 
 namespace Beans
 {
@@ -15,6 +26,11 @@ namespace Beans
   MagicBeansEngine::MagicBeansEngine(const std::string& gamename, CursorMode cursorMode) :
     gameWindow_(gamename, cursorMode, 1920, 1080), cameraObject_(nullptr), timeElapsed_(0)
   {
+    /*
+      Use the default constructor for workers which will automatically
+      use all of the threads in the machine
+    */
+
     //Automatically register sprite's draw functions
     RegisterDrawFunction(Sprite::DrawSprites);
     RegisterDrawFunction(CubeMesh::DrawSprites);
@@ -52,6 +68,11 @@ namespace Beans
     drawFunctions_.push_back(function);
   }
 
+  void MagicBeansEngine::RegisterUpdateJob(JobFunction job)
+  {
+    updateJobs_.push_back(job);
+  }
+
   GameObject * MagicBeansEngine::CreateObject(const std::string & name)
   {
     objects_.emplace_back(new GameObject(name));
@@ -72,14 +93,24 @@ namespace Beans
   {
     double dt = gameWindow_.GetDeltaTime();
     timeElapsed_ += dt;
-    (void)dt;
-    
 
-    //Call all currently registered update functions
+    ////Start all currently registered update jobs
+    //EngineRunUpdateJobData updateJobData;
+    //updateJobData.dt = static_cast<float>(dt);
+    //updateJobData.jobs = &updateJobs_;
+    //
+    ////Start the execution of the update jobs
+    //Job* updateJob = CreateJob(RunUpdateJobs, updateJobData);
+    //workers_.Run(updateJob);
+
+    //Call all currently registered synchronus update functions
     for (MagicBeansEngine::UpdateFunction func : updateFunctions_)
     {
       func(dt);
     }
+
+    //Wait for the update jobs to be finished
+    //workers_.Wait(updateJob);
   }
 
   void MagicBeansEngine::DrawStep()
@@ -121,5 +152,20 @@ namespace Beans
     Sprite::InitRendering();
     CubeMesh::InitRendering(this);
   }
+
+  void MagicBeansEngine::RunUpdateJobs(Job * job, void * uncast_data)
+  {
+    EngineRunUpdateJobData* data = reinterpret_cast<EngineRunUpdateJobData*>(uncast_data);
+
+    UpdateJobData updateData;
+    updateData.deltaTime = data->dt;
+
+    for (auto jobFunc : *(data->jobs))
+    {
+      job->RunChild(CreateJob(jobFunc, updateData, nullptr));
+    }
+  }
+
+  
 
 }

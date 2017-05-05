@@ -9,9 +9,9 @@
 #include "MagicBeansEngine.h"
 
 #include "PointLight.h"
+#include "DirectionalLight.h"
+#include "SpotLight.h"
 
-
-#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLM/gtc/type_ptr.hpp>
 
@@ -124,6 +124,9 @@ namespace Beans
     glErrorCheck();
 
     PointLight::SendLightsToShader(shaderProgram);
+    DirectionalLight::SendLightsToShader(shaderProgram);
+    SpotLight::SendLightsToShader(shaderProgram);
+
     glErrorCheck();
 
     for (const auto& cube : GetList())

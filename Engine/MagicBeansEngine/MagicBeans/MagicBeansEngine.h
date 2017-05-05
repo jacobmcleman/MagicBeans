@@ -8,6 +8,9 @@
 
 #include "GLM\glm.hpp"
 
+#include "JobForwardDeclarations.h"
+#include "WorkStealingQueue.h"
+
 namespace Beans
 {
   // This is an example of a class exported from the MagicBeansEngine.lib
@@ -24,6 +27,8 @@ namespace Beans
     void RegisterUpdateFunction(UpdateFunction function);
     void RegisterDrawFunction(DrawFunction function);
 
+    void RegisterUpdateJob(JobFunction job);
+
     GameObject* CreateObject(const std::string& name);
 
     double GetTimeSinceStartup() const;
@@ -37,15 +42,24 @@ namespace Beans
 
     void SetupRendering();
 
+    static void RunUpdateJobs(Job* job, void* data);
+
     double timeElapsed_;
     WindowManager gameWindow_;
     std::string gameName_;
 
     GameObject* cameraObject_;
 
+    //WorkStealingQueue workers_;
+
     std::vector<GameObject*> objects_;
+
     std::vector<DrawFunction> drawFunctions_;
+
     std::vector<UpdateFunction> updateFunctions_;
+    std::vector<JobFunction> updateJobs_;
+
+    
   };
 
 }

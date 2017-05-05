@@ -6,7 +6,6 @@
 
 #include "Logger.h"
 
-#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLM/gtc/type_ptr.hpp>
 

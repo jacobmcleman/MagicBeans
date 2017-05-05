@@ -14,6 +14,8 @@
 #include "LookAtMeComponent.h"
 #include "FPSController.h"
 #include "PointLight.h"
+#include "DirectionalLight.h"
+#include "SpotLight.h"
 #include "IdleMovement.h"
 
 using namespace Beans;
@@ -71,13 +73,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     transform->position = vec3(0, 0, ceilingHeight);
     transform->scale = vec3(roomWidth, roomLength, 1);
     cube = roof->AddComponent<CubeMesh>();
-    cube->material = roomMat;
-
-    GameObject* northWall = testApp.CreateObject("North Wall");
-    transform = northWall->AddComponent<Transform>();
-    transform->position = vec3(0, 0.5f * roomLength, wallCenter);
-    transform->scale = vec3(roomWidth, wallThickness, roomHeight);
-    cube = northWall->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
     GameObject* southWall = testApp.CreateObject("South Wall");
@@ -142,6 +137,120 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     mover->basePosition = vec3(0, 0.25f * roomLength, wallCenter);
     cube = lightC->AddComponent<CubeMesh>();
     cube->material = Material::SelfIlluminated::BlueLight;
+
+    GameObject* floor2 = testApp.CreateObject("Floor");
+    transform = floor2->AddComponent<Transform>();
+    transform->position = vec3(0, roomLength * 1.5f, floorHeight);
+    transform->scale = vec3(roomWidth, roomLength * 2, 1);
+    cube = floor2->AddComponent<CubeMesh>();
+    cube->material = roomMat;
+
+    float curLinePos = 0;
+    float materialSampleSize = 8;
+    float materialSampleSpacing = materialSampleSize * 1.1f;
+
+#define PLACE_MATERIAL_SAMPLE(mat, category) \
+    GameObject* mat##Cube = testApp.CreateObject( #mat ); \
+    transform = mat##Cube->AddComponent<Transform>(); \
+    transform->position = vec3(roomWidth * 0.3f, roomLength * 0.8f + curLinePos, 2); \
+    transform->scale = vec3(materialSampleSize, materialSampleSize, materialSampleSize); \
+    curLinePos += materialSampleSpacing; \
+    cube = mat##Cube->AddComponent<CubeMesh>(); \
+    cube->material = Material::##category##::##mat 
+    
+    //////////////////// GEMS ///////////////////
+    PLACE_MATERIAL_SAMPLE(Emerald, Gems);
+    PLACE_MATERIAL_SAMPLE(Jade, Gems);
+    PLACE_MATERIAL_SAMPLE(Obsidian, Gems);
+    PLACE_MATERIAL_SAMPLE(Pearl, Gems);
+    PLACE_MATERIAL_SAMPLE(Ruby, Gems);
+    PLACE_MATERIAL_SAMPLE(Turquoise, Gems);
+    ////////////////// METALS ///////////////////
+    PLACE_MATERIAL_SAMPLE(Brass, Metals);
+    PLACE_MATERIAL_SAMPLE(Bronze, Metals);
+    PLACE_MATERIAL_SAMPLE(Chrome, Metals);
+    PLACE_MATERIAL_SAMPLE(Copper, Metals);
+    PLACE_MATERIAL_SAMPLE(Gold, Metals);
+    PLACE_MATERIAL_SAMPLE(Silver, Metals);
+    ///////////////// PLASTICS //////////////////
+    PLACE_MATERIAL_SAMPLE(Black, Plastics);
+    PLACE_MATERIAL_SAMPLE(Cyan, Plastics);
+    PLACE_MATERIAL_SAMPLE(Green, Plastics);
+    PLACE_MATERIAL_SAMPLE(Red, Plastics);
+    PLACE_MATERIAL_SAMPLE(White, Plastics);
+    PLACE_MATERIAL_SAMPLE(Yellow, Plastics);
+
+
+#undef PLACE_MATERIAL_SAMPLE
+
+    GameObject* lightD = testApp.CreateObject("LightD");
+    transform = lightD->AddComponent<Transform>();
+    transform->position = vec3(0, roomLength, wallCenter + 5);
+    transform->scale = vec3(3, 3, 3);
+    light = lightD->AddComponent<PointLight>();
+    light->power = 10;
+    light->color = vec3(1, 1, 1);
+    mover = lightD->AddComponent<IdleMovement>();
+    mover->moveMagnitude = vec3(0, roomLength, roomHeight * 0.25f);
+    mover->moveFrequency = vec3(0.05f, -0.05f, 0);
+    mover->basePosition = vec3(0, 2 * roomLength, wallCenter + 5);
+    cube = lightD->AddComponent<CubeMesh>();
+    cube->material = Material::SelfIlluminated::WhiteLight;
+
+    GameObject* floor3 = testApp.CreateObject("Floor");
+    transform = floor3->AddComponent<Transform>();
+    transform->position = vec3(roomWidth * 1.5f, roomLength * 1.5f, floorHeight);
+    transform->scale = vec3(roomWidth * 2, roomLength * 2, 1);
+    cube = floor3->AddComponent<CubeMesh>();
+    cube->material = roomMat;
+
+    GameObject* spotLight = testApp.CreateObject("Spotlight");
+    transform = spotLight->AddComponent<Transform>();
+    transform->position = vec3(roomWidth * 0.8f, roomLength * 0.8f, ceilingHeight * 2);
+    transform->rotation = vec3(radians(-45.0f), 0, radians(-45.0f));
+    SpotLight* spotlight = spotLight->AddComponent<SpotLight>();
+    spotlight->color = vec3(1.0f, 1.0f, 0.8f);
+    spotlight->inner_cutoff = 0.9f;
+    spotlight->outer_cutoff = 0.89f;
+    spotlight->power = 50.0f;
+    cube = spotLight->AddComponent<CubeMesh>();
+    cube->material = Material::SelfIlluminated::WhiteLight;
+
+
+    {
+      GameObject* snowmanBodyA = testApp.CreateObject("Snowman Lower Body");
+      transform = snowmanBodyA->AddComponent<Transform>();
+      transform->position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 5.5f);
+      transform->rotation = vec3(0, 0, radians(-30.0f));
+      transform->scale = vec3(10, 10, 10);
+      cube = snowmanBodyA->AddComponent<CubeMesh>();
+      cube->material = Material::Metals::Gold;
+
+      GameObject* snowmanBodyB = testApp.CreateObject("Snowman Mid Body");
+      transform = snowmanBodyB->AddComponent<Transform>();
+      transform->position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 13.0f);
+      transform->rotation = vec3(0, 0, radians(-30.0f));
+      transform->scale = vec3(7.5f, 7.5f, 7.5f);
+      cube = snowmanBodyB->AddComponent<CubeMesh>();
+      cube->material = Material::Metals::Gold;
+
+      GameObject* snowmanBodyC = testApp.CreateObject("Snowman Top Body");
+      transform = snowmanBodyC->AddComponent<Transform>();
+      transform->position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 18.0f);
+      transform->rotation = vec3(0, 0, radians(-30.0f));
+      transform->scale = vec3(5, 5, 5);
+      cube = snowmanBodyC->AddComponent<CubeMesh>();
+      cube->material = Material::Metals::Gold;
+    }
+
+
+    GameObject* sun = testApp.CreateObject("Sun");
+    transform = sun->AddComponent<Transform>();
+    transform->position = vec3(0, 0, 50);
+    transform->rotation = vec3(radians(-60.0f), 0, radians(-60.0f));
+    DirectionalLight* dirLight = sun->AddComponent<DirectionalLight>();
+    dirLight->color = vec3(1, 1, 1);
+    dirLight->power = 0.05f;
     
     //transform->rotation = 4.0f;
     GameObject* cam = testApp.GetCamera();

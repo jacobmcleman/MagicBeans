@@ -28,6 +28,15 @@
     <Filter Include="Source Files\Graphics">
       <UniqueIdentifier>{11e71573-475d-42ca-819d-4b68af7470c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\JobsStuff">
+      <UniqueIdentifier>{648bdd4f-3615-4979-a5ba-cd245c72ded0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Lights">
+      <UniqueIdentifier>{c9207e23-4351-4c30-87fa-223046bc3c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Lights">
+      <UniqueIdentifier>{8e24659d-afde-4bd3-8ab0-2a139bce2edd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowManager.h">
@@ -84,8 +93,17 @@
     <ClInclude Include="Material.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="JobData.h">
+      <Filter>Header Files\JobsStuff</Filter>
+    </ClInclude>
     <ClInclude Include="PointLight.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Components\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Header Files\Components\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>Header Files\Components\Lights</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +150,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files\Components\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Source Files\Components\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

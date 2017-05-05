@@ -54,7 +54,7 @@ namespace Beans
                   Owner->GetComponent<Transform>()->position + lookDir, //Camera center
                   GlobalUp.Get()); //Up vector
 
-    mat4 projection = glm::perspective(45.0f, 1920.0f / 1080.0f, 0.1f, 250.0f);
+    mat4 projection = glm::perspective(45.0f, 1920.0f / 1080.0f, 0.1f, 1000.0f);
 
     matrix_ = projection * view;
 #endif

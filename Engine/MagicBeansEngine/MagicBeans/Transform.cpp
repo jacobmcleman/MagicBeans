@@ -45,6 +45,10 @@ namespace Beans
   {
     rotation += eulerAngles;
   }
+  vec3 Transform::GetForwardDirection()
+  {
+    return (rotation_.operator glm::tmat3x3<float, glm::highp>()) * vec3(0, 1, 0);
+  }
   quat Transform::GetRotationQuaternion() const
   {
     return rotation_;

@@ -22,6 +22,8 @@ namespace Beans
 
     void RotateBy(vec3 eulerAngles);
 
+    vec3 GetForwardDirection();
+
     quat GetRotationQuaternion() const;
 
   private:
