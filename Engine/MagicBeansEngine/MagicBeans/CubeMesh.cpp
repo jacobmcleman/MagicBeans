@@ -82,10 +82,9 @@ namespace Beans
 
   }
 
-  void CubeMesh::Draw()
+  void CubeMesh::Draw(Shader* shader)
   {
-    material.Use(shaderProgram);
-    shaderProgram->SetUniformMat4f("object_to_world", Owner->GetComponent<Transform>()->GetMatrix());
+    shader->SetUniformMat4f("object_to_world", Owner->GetComponent<Transform>()->GetMatrix());
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glErrorCheck();
   }
@@ -93,7 +92,7 @@ namespace Beans
   void CubeMesh::InitRendering(MagicBeansEngine* engine)
   {
     LOG("Initializing Cube Rendering");
-    shaderProgram = new Shader("Resources/Shaders/basic.frag", "Resources/Shaders/basic.vert");
+    shaderProgram = new Shader("Resources/Shaders/basic_pbr.frag", "Resources/Shaders/basic.vert");
 
     glGenVertexArrays(1, &VAO); glErrorCheck();
     glGenBuffers(1, &VBO); glErrorCheck();
@@ -120,21 +119,35 @@ namespace Beans
     glErrorCheck();
 
     shaderProgram->SetUniformMat4f("world_to_camera", camTransform);
-    shaderProgram->SetUniformVec3f("viewPos", engine_->GetCamera()->GetComponent<Transform>()->position.Get());
+    shaderProgram->SetUniformVec3f("viewerPos", engine_->GetCamera()->GetComponent<Transform>()->position.Get());
+    //shaderProgram->SetUniformFloat("far_plane", SHADOW_MAX_DEPTH);
+    
     glErrorCheck();
 
     PointLight::SendLightsToShader(shaderProgram);
-    DirectionalLight::SendLightsToShader(shaderProgram);
-    SpotLight::SendLightsToShader(shaderProgram);
+    //DirectionalLight::SendLightsToShader(shaderProgram);
+    //SpotLight::SendLightsToShader(shaderProgram);
 
     glErrorCheck();
 
     for (const auto& cube : GetList())
     {
-      cube->Draw();
+      cube->material.Use(shaderProgram);
+      cube->Draw(shaderProgram);
     }
 
     glBindVertexArray(0);
     glErrorCheck();
+  }
+  void CubeMesh::DrawShapeOnly(Shader* shader)
+  {
+    shader->Use();
+    glBindVertexArray(VAO);
+    //shaderProgram->SetUniformMat4f("world_to_camera", camTransform);
+    for (const auto& cube : GetList())
+    {
+      cube->Draw(shader);
+    }
+    glBindVertexArray(0);
   }
 }

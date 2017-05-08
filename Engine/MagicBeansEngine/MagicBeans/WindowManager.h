@@ -23,6 +23,9 @@ namespace Beans
     double GetDeltaTime();
     bool IsKeyTriggered(int key);
 
+    int Width() const;
+    int Height() const;
+
   private:
     GLFWwindow* window_;
     int width_;

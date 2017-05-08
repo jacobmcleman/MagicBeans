@@ -12,6 +12,7 @@ using namespace glm;
 namespace Beans
 {
   class Transform;
+  class MagicBeansEngine;
 
   class PointLight : public Component, protected Utilities::AutoLister<PointLight>
   {
@@ -26,7 +27,20 @@ namespace Beans
 
     static void SendLightsToShader(Shader* shader);
 
+    static void ComputeDepthMapsForShadows(mat4 camMatrix);
+
+    static void InitRendering(MagicBeansEngine* engine);
+
   private:
     Transform* transform_;
+
+    GLuint depthCubemap_;
+    GLuint depthMapFBO_;
+
+    static MagicBeansEngine* engine_;
+
+    const static GLuint SHADOW_WIDTH = 1024;
+    const static GLuint SHADOW_HEIGHT = 1024;
+    static Shader* shadowMapper_;
   };
 }

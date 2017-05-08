@@ -99,4 +99,12 @@ namespace Beans
     lastFrameTime_ = currentFrame;
     return deltaTime;
   }
+  int WindowManager::Width() const
+  {
+    return width_;
+  }
+  int WindowManager::Height() const
+  {
+    return height_;
+  }
 }

@@ -14,7 +14,7 @@ namespace Beans
   class Shader
   {
   public:
-    Shader(const char* fragmentFile, const char* vertexFile);
+    Shader(const char* fragmentFile, const char* vertexFile, const char* geomFile = nullptr);
 
     void Use() const;
 
@@ -24,11 +24,13 @@ namespace Beans
     void SetUniformFloat(const GLchar* name, const float& value) const;
     void SetUniformInt (const GLchar* name, const int& value) const;
 
+    GLuint getUniformLoc(const GLchar* name) const;
+
     GLuint GetShaderProgram() const;
 
   private:
     GLuint shaderProgram_;
 
-    GLuint getUniformLoc(const GLchar* name) const;
+   
   };
 }

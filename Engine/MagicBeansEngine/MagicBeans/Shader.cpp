@@ -28,15 +28,27 @@ namespace
   }
 }
 
-Beans::Shader::Shader(const char * fragmentFileName, const char * vertexFileName)
+Beans::Shader::Shader(const char * fragmentFileName, const char * vertexFileName, const char* geomFileName)
 {
   static GLchar infoLog[512];
 
-  std::string vertCode, fragCode;
-  std::ifstream fragFile, vertFile;
+  std::string vertCode, fragCode, geomCode;
+  std::ifstream fragFile, vertFile, geomFile;
 
   vertFile.open(vertexFileName);
   fragFile.open(fragmentFileName);
+
+  bool hasGeom = geomFileName != nullptr;
+
+  if (hasGeom)
+  {
+    geomFile.open(geomFileName);
+
+    if (!geomFile.good())
+    {
+      LOG(std::string("Geometry shader failed to open (location given: ") + fragmentFileName + ")");
+    }
+  }
 
   if (!vertFile.good())
   {
@@ -46,29 +58,43 @@ Beans::Shader::Shader(const char * fragmentFileName, const char * vertexFileName
   {
     LOG(std::string("Fragment shader failed to open (location given: ") + fragmentFileName + ")");
   }
+  
 
-  std::stringstream vertStream, fragStream;
+  std::stringstream vertStream, fragStream, geomStream;
 
   vertStream << vertFile.rdbuf();
   fragStream << fragFile.rdbuf();
 
+  if (hasGeom)
+  {
+    geomStream << geomFile.rdbuf();
+  }
+
   vertFile.close();
   fragFile.close();
 
+  if (hasGeom) geomFile.close();
+
   vertCode = vertStream.str();
   fragCode = fragStream.str();
+  if (hasGeom) geomCode = geomStream.str();
 
   const GLchar* vertShaderCode = vertCode.c_str();
   const GLchar* fragShaderCode = fragCode.c_str();
+  const GLchar* geomShaderCode = nullptr;
+  if (hasGeom) geomShaderCode = geomCode.c_str();
 
   //Compile the shaders
   GLuint vertShader = CompileShader(vertShaderCode, GL_VERTEX_SHADER);
   GLuint fragShader = CompileShader(fragShaderCode, GL_FRAGMENT_SHADER);
+  GLuint geomShader = 0;
+  if (hasGeom) geomShader = CompileShader(geomShaderCode, GL_GEOMETRY_SHADER);
   
   //Link the shaders into a program
   shaderProgram_ = glCreateProgram();
   glAttachShader(shaderProgram_, vertShader);
   glAttachShader(shaderProgram_, fragShader);
+  if (hasGeom) glAttachShader(shaderProgram_, geomShader);
   glLinkProgram(shaderProgram_);
 
   GLint success;
@@ -82,6 +108,7 @@ Beans::Shader::Shader(const char * fragmentFileName, const char * vertexFileName
 
   glDeleteShader(vertShader);
   glDeleteShader(fragShader);
+  glDeleteShader(geomShader);
 }
 
 void Beans::Shader::Use() const

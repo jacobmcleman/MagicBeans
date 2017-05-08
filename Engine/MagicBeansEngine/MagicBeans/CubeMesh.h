@@ -22,10 +22,11 @@ namespace Beans
     CubeMesh(GameObject* owner);
     virtual ~CubeMesh();
 
-    void Draw();
+    void Draw(Shader* shader);
 
     static void InitRendering(MagicBeansEngine* engine);
     static void DrawSprites(const mat4& camTransform);
+    static void DrawShapeOnly(Shader* shader);
 
     Material material;
 

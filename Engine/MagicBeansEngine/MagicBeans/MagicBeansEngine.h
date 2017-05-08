@@ -26,6 +26,7 @@ namespace Beans
 
     void RegisterUpdateFunction(UpdateFunction function);
     void RegisterDrawFunction(DrawFunction function);
+    void RegisterPreDrawFunction(DrawFunction function);
 
     void RegisterUpdateJob(JobFunction job);
 
@@ -35,12 +36,20 @@ namespace Beans
 
     GameObject* GetCamera();
 
+    const WindowManager& GetGameWindow() const;
+
+    //External accessor function to allow other modules to draw the game
+    //scene from different perspectives
+    void DrawScene(glm::mat4 projection);
+
   private:
     void UpdateStep();
     void DrawStep();
     void DeleteStep();
 
     void SetupRendering();
+
+    
 
     static void RunUpdateJobs(Job* job, void* data);
 
@@ -55,6 +64,7 @@ namespace Beans
     std::vector<GameObject*> objects_;
 
     std::vector<DrawFunction> drawFunctions_;
+    std::vector<DrawFunction> earlyDrawFunctions_;
 
     std::vector<UpdateFunction> updateFunctions_;
     std::vector<JobFunction> updateJobs_;

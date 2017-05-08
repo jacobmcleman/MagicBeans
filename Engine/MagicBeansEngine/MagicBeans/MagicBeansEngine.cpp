@@ -8,6 +8,7 @@
 #include "CubeMesh.h"
 #include "Camera.h"
 #include "JobData.h"
+#include "PointLight.h"
 
 namespace
 {
@@ -34,6 +35,8 @@ namespace Beans
     //Automatically register sprite's draw functions
     RegisterDrawFunction(Sprite::DrawSprites);
     RegisterDrawFunction(CubeMesh::DrawSprites);
+
+    RegisterPreDrawFunction(PointLight::ComputeDepthMapsForShadows);
 
     SetupRendering();
 
@@ -68,6 +71,11 @@ namespace Beans
     drawFunctions_.push_back(function);
   }
 
+  void MagicBeansEngine::RegisterPreDrawFunction(DrawFunction function)
+  {
+    earlyDrawFunctions_.push_back(function);
+  }
+
   void MagicBeansEngine::RegisterUpdateJob(JobFunction job)
   {
     updateJobs_.push_back(job);
@@ -87,6 +95,11 @@ namespace Beans
   GameObject * MagicBeansEngine::GetCamera()
   {
     return cameraObject_;
+  }
+
+  const WindowManager& MagicBeansEngine::GetGameWindow() const
+  {
+    return gameWindow_;
   }
 
   void MagicBeansEngine::UpdateStep()
@@ -122,11 +135,14 @@ namespace Beans
       {
         cam->UpdateMatrix();
 
-        //Call all currently registered update functions
-        for (MagicBeansEngine::DrawFunction func : drawFunctions_)
+        //Call early draw functions for things such as shadow computation
+        for (MagicBeansEngine::DrawFunction func : earlyDrawFunctions_)
         {
           func(cam->GetMatrix());
         }
+
+        //Finally, draw the scene from the camera's perspective
+        DrawScene(cam->GetMatrix());
       }
     }
     
@@ -151,6 +167,16 @@ namespace Beans
   {
     Sprite::InitRendering();
     CubeMesh::InitRendering(this);
+    PointLight::InitRendering(this);
+  }
+
+  void MagicBeansEngine::DrawScene(mat4 projection)
+  {
+    //Call all currently registered draw functions
+    for (MagicBeansEngine::DrawFunction func : drawFunctions_)
+    {
+      func(projection);
+    }
   }
 
   void MagicBeansEngine::RunUpdateJobs(Job * job, void * uncast_data)
