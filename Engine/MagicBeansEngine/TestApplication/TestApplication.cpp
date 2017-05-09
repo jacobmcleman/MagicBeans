@@ -96,15 +96,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     cube = eastWall->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
-    
-
+    GameObject* lightA = testApp.CreateObject("LightA");
+    transform = lightA->AddComponent<Transform>();
+    transform->position = vec3(30, 0.3f * roomLength, wallCenter);
+    transform->scale = vec3(3, 3, 3);
+    PointLight* light = lightA->AddComponent<PointLight>();
+    light->color = vec3(1.0f, 1.0f, 1.0f);
+    light->power = 150;
+    //IdleMovement* mover = lightA->AddComponent<IdleMovement>();
+   //mover->moveMagnitude = vec3(0.2f * roomWidth, 1.3f * roomLength, roomHeight * 0.07f);
+   //mover->moveFrequency = vec3(0.03f, 0.04f, 0.10f);
+   //mover->basePosition = vec3(0, 0.9f * roomLength, wallCenter);
+    //cube = lightA->AddComponent<CubeMesh>();
+    //cube->material = Material::Plastics::Red;
+    //
     GameObject* lightB = testApp.CreateObject("LightB");
     transform = lightB->AddComponent<Transform>();
     transform->position = vec3(0.25f * roomWidth, 0, wallCenter);
     transform->scale = vec3(3, 3, 3);
-    PointLight* light = lightB->AddComponent<PointLight>();
-    light->power = 70;
-    light->color = vec3(1, 1, 1);
+    //light = lightB->AddComponent<PointLight>();
+    //light->power = 75;
+    //light->color = vec3(0.0f, 0.7f, 1.0f);
     //mover = lightB->AddComponent<IdleMovement>();
     //mover->moveMagnitude = vec3(0, 0.3f * roomLength, roomHeight * 0.25f);
     //mover->moveFrequency = vec3(0, 0.05f, 0.11f);
@@ -112,27 +124,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //cube = lightB->AddComponent<CubeMesh>();
     //cube->material = Material::Plastics::Green;
 
-    GameObject* lightA = testApp.CreateObject("LightA");
-    transform = lightA->AddComponent<Transform>();
-    transform->position = vec3(0.25f * roomWidth, 0, wallCenter);
-    transform->scale = vec3(3, 3, 3);
-    light = lightA->AddComponent<PointLight>();
-    light->color = vec3(1.0f, 1.0f, 1.0f);
-    light->power = 150;
-    IdleMovement* mover = lightA->AddComponent<IdleMovement>();
-    mover->moveMagnitude = vec3(0.2f * roomWidth, 1.3f * roomLength, roomHeight * 0.07f);
-    mover->moveFrequency = vec3(0.03f, 0.04f, 0.10f);
-    mover->basePosition = vec3(0, 0.9f * roomLength, wallCenter);
-    //cube = lightA->AddComponent<CubeMesh>();
-    //cube->material = Material::Plastics::Red;
+    
 
-    //GameObject* lightC = testApp.CreateObject("LightC");
-    //transform = lightC->AddComponent<Transform>();
-    //transform->position = vec3(0, 0.25f * roomLength, wallCenter);
-    //transform->scale = vec3(3, 3, 3);
+    GameObject* lightC = testApp.CreateObject("LightC");
+    transform = lightC->AddComponent<Transform>();
+    transform->position = vec3(0, 0.25f * roomLength, wallCenter);
+    transform->scale = vec3(3, 3, 3);
     //light = lightC->AddComponent<PointLight>();
     //light->power = 70;
-    //light->color = vec3(0, 0, 1);
+    //light->color = vec3(1.0f, 0, 0.7f);
     //mover = lightC->AddComponent<IdleMovement>();
     //mover->moveMagnitude = vec3(0.25f * roomWidth, 0.32f * roomHeight, roomHeight * 0.25f);
     //mover->moveFrequency = vec3(0.06f, 0.025f, 0.09f);
@@ -210,11 +210,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     transform = spotLight->AddComponent<Transform>();
     transform->position = vec3(roomWidth * 0.8f, roomLength * 0.8f, ceilingHeight * 2);
     transform->rotation = vec3(radians(-45.0f), 0, radians(-45.0f));
-    SpotLight* spotlight = spotLight->AddComponent<SpotLight>();
-    spotlight->color = vec3(1.0f, 1.0f, 0.8f);
-    spotlight->inner_cutoff = 0.9f;
-    spotlight->outer_cutoff = 0.89f;
-    spotlight->power = 50.0f;
+    //SpotLight* spotlight = spotLight->AddComponent<SpotLight>();
+    //spotlight->color = vec3(1.0f, 1.0f, 0.8f);
+    //spotlight->inner_cutoff = 0.9f;
+    //spotlight->outer_cutoff = 0.89f;
+    //spotlight->power = 50.0f;
     //cube = spotLight->AddComponent<CubeMesh>();
     //cube->material = Material::SelfIlluminated::WhiteLight;
 
@@ -250,9 +250,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     transform = sun->AddComponent<Transform>();
     transform->position = vec3(0, 0, 50);
     transform->rotation = vec3(radians(-60.0f), 0, radians(-60.0f));
-    //DirectionalLight* dirLight = sun->AddComponent<DirectionalLight>();
-    //dirLight->color = vec3(1, 1, 1);
-    //dirLight->power = 0.05f;
+    DirectionalLight* dirLight = sun->AddComponent<DirectionalLight>();
+    dirLight->color = vec3(1, 1, 1);
+    dirLight->power = 0.05f;
     
     //transform->rotation = 4.0f;
     GameObject* cam = testApp.GetCamera();

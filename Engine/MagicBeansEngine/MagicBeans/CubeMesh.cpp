@@ -125,7 +125,7 @@ namespace Beans
     glErrorCheck();
 
     PointLight::SendLightsToShader(shaderProgram);
-    //DirectionalLight::SendLightsToShader(shaderProgram);
+    DirectionalLight::SendLightsToShader(shaderProgram);
     //SpotLight::SendLightsToShader(shaderProgram);
 
     glErrorCheck();

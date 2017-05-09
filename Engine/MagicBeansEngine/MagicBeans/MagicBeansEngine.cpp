@@ -36,7 +36,7 @@ namespace Beans
     RegisterDrawFunction(Sprite::DrawSprites);
     RegisterDrawFunction(CubeMesh::DrawSprites);
 
-    RegisterPreDrawFunction(PointLight::ComputeDepthMapsForShadows);
+    //RegisterPreDrawFunction(PointLight::ComputeDepthMapsForShadows);
 
     SetupRendering();
 

@@ -30,9 +30,7 @@ namespace Beans
 
       shader->SetUniformVec3f((uniformName + "direction").c_str(), light->transform_->GetForwardDirection());
 
-      shader->SetUniformVec3f((uniformName + "ambient").c_str(), light->color * 0.2f);
-      shader->SetUniformVec3f((uniformName + "diffuse").c_str(), light->color * 0.8f);
-      shader->SetUniformVec3f((uniformName + "specular").c_str(), light->color * 1.0f);
+      shader->SetUniformVec3f((uniformName + "color").c_str(), light->color);
 
       glErrorCheck();
 
