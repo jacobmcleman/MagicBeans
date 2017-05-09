@@ -24,7 +24,7 @@ namespace Beans
 
     glBindTexture(GL_TEXTURE_2D, depthMap_);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -68,9 +68,11 @@ namespace Beans
       glUniform1i(tex, i);
       
       glActiveTexture(GL_TEXTURE0 + i);
-      glBindTexture(GL_TEXTURE_CUBE_MAP, light->depthMap_);
+      glBindTexture(GL_TEXTURE_2D, light->depthMap_);
 
       ++i;
+
+      glErrorCheck();
 
       if (i >= MAX_DIRECTIONAL_LIGHTS) return;
     }
