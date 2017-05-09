@@ -252,7 +252,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     transform->rotation = vec3(radians(-60.0f), 0, radians(-60.0f));
     DirectionalLight* dirLight = sun->AddComponent<DirectionalLight>();
     dirLight->color = vec3(1, 1, 1);
-    dirLight->power = 0.05f;
+    dirLight->shadow_distance = 250;
     
     //transform->rotation = 4.0f;
     GameObject* cam = testApp.GetCamera();

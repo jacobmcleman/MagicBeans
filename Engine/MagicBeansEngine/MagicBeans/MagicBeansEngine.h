@@ -17,7 +17,11 @@ namespace Beans
   class MagicBeansEngine
   {
   public:
+    //Draw functions take the projection matrix that should be used
     typedef std::function<void(glm::mat4)> DrawFunction;
+    //Pre-draw functions take the position of the viewer
+    typedef std::function<void(glm::vec3)> PreDrawFunction;
+    //Update functions take the time taken to present the previous frame
     typedef std::function<void(double)> UpdateFunction;
 
     MagicBeansEngine(const std::string& gamename, CursorMode cursorMode = CursorMode::Normal);
@@ -26,7 +30,7 @@ namespace Beans
 
     void RegisterUpdateFunction(UpdateFunction function);
     void RegisterDrawFunction(DrawFunction function);
-    void RegisterPreDrawFunction(DrawFunction function);
+    void RegisterPreDrawFunction(PreDrawFunction function);
 
     void RegisterUpdateJob(JobFunction job);
 
@@ -64,7 +68,7 @@ namespace Beans
     std::vector<GameObject*> objects_;
 
     std::vector<DrawFunction> drawFunctions_;
-    std::vector<DrawFunction> earlyDrawFunctions_;
+    std::vector<PreDrawFunction> earlyDrawFunctions_;
 
     std::vector<UpdateFunction> updateFunctions_;
     std::vector<JobFunction> updateJobs_;

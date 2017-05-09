@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "JobData.h"
 #include "PointLight.h"
+#include "DirectionalLight.h"
 
 namespace
 {
@@ -37,6 +38,7 @@ namespace Beans
     RegisterDrawFunction(CubeMesh::DrawSprites);
 
     //RegisterPreDrawFunction(PointLight::ComputeDepthMapsForShadows);
+    RegisterPreDrawFunction(DirectionalLight::PrepareLightDepthBuffers);
 
     SetupRendering();
 
@@ -71,7 +73,7 @@ namespace Beans
     drawFunctions_.push_back(function);
   }
 
-  void MagicBeansEngine::RegisterPreDrawFunction(DrawFunction function)
+  void MagicBeansEngine::RegisterPreDrawFunction(PreDrawFunction function)
   {
     earlyDrawFunctions_.push_back(function);
   }
@@ -133,12 +135,13 @@ namespace Beans
       Camera* cam = cameraObject_->GetComponent<Camera>();
       if (cam != nullptr)
       {
+        vec3 camPos = cameraObject_->GetComponent<Transform>()->position;
         cam->UpdateMatrix();
 
         //Call early draw functions for things such as shadow computation
-        for (MagicBeansEngine::DrawFunction func : earlyDrawFunctions_)
+        for (MagicBeansEngine::PreDrawFunction func : earlyDrawFunctions_)
         {
-          func(cam->GetMatrix());
+          func(camPos);
         }
 
         //Finally, draw the scene from the camera's perspective
@@ -168,6 +171,7 @@ namespace Beans
     Sprite::InitRendering();
     CubeMesh::InitRendering(this);
     PointLight::InitRendering(this);
+    DirectionalLight::InitRendering(this);
   }
 
   void MagicBeansEngine::DrawScene(mat4 projection)
