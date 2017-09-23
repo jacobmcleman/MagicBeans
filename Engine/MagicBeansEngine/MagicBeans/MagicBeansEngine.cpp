@@ -110,7 +110,7 @@ namespace Beans
     }
 
     //Wait for the update jobs to be finished
-    //workers_.Wait(updateJob);
+   // workers_.Wait(updateJob);
   }
 
   void MagicBeansEngine::DrawStep()

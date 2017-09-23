@@ -1,5 +1,6 @@
-Startup at Fri Apr 28 15:54:55 2017
-Fri Apr 28 15:54:55 2017        |f:\magicbeans\engine\magicbeansengine\magicbeans\windowmanager.cpp              (  23)|Beans::WindowManager::WindowManager               |Creating window manager
-Fri Apr 28 15:54:56 2017        |f:\magicbeans\engine\magicbeansengine\magicbeans\windowmanager.cpp              (  53)|Beans::WindowManager::WindowManager               |Window created
-Fri Apr 28 15:55:02 2017        |f:\magicbeans\engine\magicbeansengine\magicbeans\shader.cpp                     (  42)|Beans::Shader::Shader                             |Vertex shader failed to open (location given: Resources/Shaders/basic.vert)
-Fri Apr 28 15:55:03 2017        |f:\magicbeans\engine\magicbeansengine\magicbeans\shader.cpp                     (  46)|Beans::Shader::Shader                             |Fragment shader failed to open (location given: Resources/Shaders/basic.frag)
+Startup at Fri Sep 22 22:00:37 2017
+Fri Sep 22 22:00:37 2017  |WindowManager.cpp       (  24)|Beans::WindowManager::WindowManager               |Creating window manager
+Fri Sep 22 22:01:58 2017  |WindowManager.cpp       (  71)|Beans::WindowManager::WindowManager               |Window created
+Fri Sep 22 22:01:58 2017  |Sprite.cpp              (  56)|Beans::Sprite::InitRendering                      |Initializing Sprite rendering
+Fri Sep 22 22:01:58 2017  |CubeMesh.cpp            (  95)|Beans::CubeMesh::InitRendering                    |Initializing Cube Rendering
+Fri Sep 22 22:01:58 2017  |Helpers.cpp             (  28)|GLDebug::glErrorCheck_                            |INVALID_OPERATION | CubeMesh.cpp (98)

@@ -68,23 +68,24 @@ void FPSController::Update(double dt)
   ////////////////////////////////////////
   vec2 mouseMovement = InputHandler::GetMouseMotion();
 
-  if (MagnitudeSquared(mouseMovement) > 0.005f)
+	if (MagnitudeSquared(mouseMovement) > 0.005f)
+	{
+		yaw_ += mouseMovement.x;
+
+
+		if (InvertY) pitch_ += mouseMovement.y;
+		else pitch_ -= mouseMovement.y;
+
+	}
+
+  if (pitch_ > c_max_pitch_)
   {
-    yaw_ += mouseMovement.x;
-
-
-    if (InvertY) pitch_ += mouseMovement.y;
-    else pitch_ -= mouseMovement.y;
-
-    if (pitch_ > c_max_pitch_)
-    {
-      pitch_ = c_max_pitch_;
-    }
-    else if (pitch_ < -c_max_pitch_)
-    {
-      pitch_ = -c_max_pitch_;
-    }
-
-    camera_->Owner->GetComponent<Transform>()->rotation = vec3(-radians(pitch_), 0, -radians(yaw_));
+    pitch_ = c_max_pitch_;
   }
+  else if (pitch_ < -c_max_pitch_)
+  {
+    pitch_ = -c_max_pitch_;
+  }
+
+  camera_->Owner->GetComponent<Transform>()->rotation = vec3(-radians(pitch_), 0, -radians(yaw_));
 }

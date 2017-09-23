@@ -79,4 +79,12 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\basic.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Shaders\basic.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

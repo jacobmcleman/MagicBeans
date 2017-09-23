@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 
 //GLFW
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 #include <assert.h>
 #include <iostream>
@@ -26,7 +26,8 @@ namespace Beans
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //glErrorCheck();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //glErrorCheck();
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //glErrorCheck();
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);//glErrorCheck();
+		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);//glErrorCheck();
+		glfwWindowHint(GLFW_REFRESH_RATE, GLFW_DONT_CARE);//glErrorCheck();
 
     window_ = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
