@@ -13,8 +13,8 @@ out vec3 worldPos;
 
 void main()
 {
-	worldPos = (vec4(aPos, 1) * object_to_world).xyz;
+	worldPos = (object_to_world * vec4(aPos, 1)).xyz;
 	uv = aUV;
-	normal = mat3(transpose(inverse(object_to_world))) * aNormal;
+	normal = (transpose(inverse(object_to_world)) * vec4(aNormal, 0)).xyz;
 	gl_Position = world_to_camera * object_to_world * vec4(aPos, 1);
 }

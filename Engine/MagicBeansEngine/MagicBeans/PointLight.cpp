@@ -35,9 +35,9 @@ namespace Beans
       shader->SetUniformVec3f((uniformName + "specular").c_str(), light->color * 1.0f);
 
       shader->SetUniformFloat((uniformName + "constant").c_str(), 1.0f);
-      shader->SetUniformFloat((uniformName + "linear").c_str(), 1.0f / light->power * 0.022f);
-      shader->SetUniformFloat((uniformName + "quadratic").c_str(), 1.0f / light->power * 0.0019f);
-
+      shader->SetUniformFloat((uniformName + "linear").c_str(), 1.0f / light->power * 0.22f);
+      shader->SetUniformFloat((uniformName + "quadratic").c_str(), 1.0f / light->power * 0.019f);
+			
       glErrorCheck();
 
       ++i;

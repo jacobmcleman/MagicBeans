@@ -1,6 +1,6 @@
-Startup at Fri Sep 22 22:00:37 2017
-Fri Sep 22 22:00:37 2017  |WindowManager.cpp       (  24)|Beans::WindowManager::WindowManager               |Creating window manager
-Fri Sep 22 22:01:58 2017  |WindowManager.cpp       (  71)|Beans::WindowManager::WindowManager               |Window created
-Fri Sep 22 22:01:58 2017  |Sprite.cpp              (  56)|Beans::Sprite::InitRendering                      |Initializing Sprite rendering
-Fri Sep 22 22:01:58 2017  |CubeMesh.cpp            (  95)|Beans::CubeMesh::InitRendering                    |Initializing Cube Rendering
-Fri Sep 22 22:01:58 2017  |Helpers.cpp             (  28)|GLDebug::glErrorCheck_                            |INVALID_OPERATION | CubeMesh.cpp (98)
+Startup at Mon Oct  2 23:13:32 2017
+Mon Oct  2 23:13:32 2017  |windowmanager.cpp       (  24)|Beans::WindowManager::WindowManager               |Creating window manager
+Mon Oct  2 23:13:33 2017  |windowmanager.cpp       (  71)|Beans::WindowManager::WindowManager               |Window created
+Mon Oct  2 23:13:33 2017  |sprite.cpp              (  56)|Beans::Sprite::InitRendering                      |Initializing Sprite rendering
+Mon Oct  2 23:13:33 2017  |cubemesh.cpp            (  95)|Beans::CubeMesh::InitRendering                    |Initializing Cube Rendering
+Mon Oct  2 23:13:33 2017  |helpers.cpp             (  28)|GLDebug::glErrorCheck_                            |INVALID_OPERATION | d:\magicbeans\engine\magicbeansengine\magicbeans\cubemesh.cpp (98)

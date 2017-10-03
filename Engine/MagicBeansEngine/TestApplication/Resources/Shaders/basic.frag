@@ -56,17 +56,17 @@ void main()
 		float attenuation = min(1.0, 1.0 / (pointLights[i].constant + pointLights[i].linear * distance + pointLights[i].quadratic * distance * distance));
 
 		//'Compute' Ambient
-		float amb = 0.05;
+		float amb = 0.5;
 		vec3 ambient = amb * pointLights[i].ambient * attenuation;
-
+		
 		//Compute Diffuse
 		float diff = max(dot(N, L), 0.0);
 		vec3 diffuse = diff * pointLights[i].diffuse * attenuation;
-
+		
 		//Compute Specular
 		float spec = pow(max(dot(N, H), 0.0), material.shininess);
 		vec3 specular = spec * pointLights[i].specular * attenuation;
-
+		
 		output += (ambient * material.ambient) + (diffuse * material.diffuse) + (specular * material.specular);
 	}
 

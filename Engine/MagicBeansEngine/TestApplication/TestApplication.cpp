@@ -188,7 +188,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     transform->position = vec3(0, roomLength, wallCenter + 5);
     transform->scale = vec3(3, 3, 3);
     light = lightD->AddComponent<PointLight>();
-    light->power = 10;
+    light->power = 100;
     light->color = vec3(1, 1, 1);
     mover = lightD->AddComponent<IdleMovement>();
     mover->moveMagnitude = vec3(0, roomLength, roomHeight * 0.25f);
