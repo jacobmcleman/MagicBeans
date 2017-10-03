@@ -34,6 +34,34 @@ in vec3 worldPos;
 
 out vec4 FragColor;
 
+vec3 CalculatePointLight(vec3 N, vec3 V, int lightIndex)
+{
+		//Vector to this light
+		vec3 L = pointLights[lightIndex].position - worldPos;
+		//Halfway vector between L and V
+		vec3 H = normalize(L + V);
+		//Distance to this light
+		float distance = length(L);
+		L = normalize(L);
+
+		//Amount this light source will fade with distance
+		float attenuation = min(1.0, 1.0 / (pointLights[lightIndex].constant + pointLights[lightIndex].linear * distance + pointLights[lightIndex].quadratic * distance * distance));
+
+		//'Compute' Ambient
+		float amb = 0.5;
+		vec3 ambient = amb * pointLights[lightIndex].ambient * attenuation;
+		
+		//Compute Diffuse
+		float diff = max(dot(N, L), 0.0);
+		vec3 diffuse = diff * pointLights[lightIndex].diffuse * attenuation;
+		
+		//Compute Specular
+		float spec = pow(max(dot(N, H), 0.0), material.shininess);
+		vec3 specular = spec * pointLights[lightIndex].specular * attenuation;
+		
+		return (ambient * material.ambient) + (diffuse * material.diffuse) + (specular * material.specular);
+}
+
 void main()
 {
 	//Compute things that are based on the surface/viewer
@@ -44,30 +72,7 @@ void main()
 
 	for(int i = 0; i < pointLightCount; ++i)
 	{
-		//Vector to this light
-		vec3 L = pointLights[i].position - worldPos;
-		//Halfway vector between L and V
-		vec3 H = normalize(L + V);
-		//Distance to this light
-		float distance = length(L);
-		L = normalize(L);
-
-		//Amount this light source will fade with distance
-		float attenuation = min(1.0, 1.0 / (pointLights[i].constant + pointLights[i].linear * distance + pointLights[i].quadratic * distance * distance));
-
-		//'Compute' Ambient
-		float amb = 0.5;
-		vec3 ambient = amb * pointLights[i].ambient * attenuation;
-		
-		//Compute Diffuse
-		float diff = max(dot(N, L), 0.0);
-		vec3 diffuse = diff * pointLights[i].diffuse * attenuation;
-		
-		//Compute Specular
-		float spec = pow(max(dot(N, H), 0.0), material.shininess);
-		vec3 specular = spec * pointLights[i].specular * attenuation;
-		
-		output += (ambient * material.ambient) + (diffuse * material.diffuse) + (specular * material.specular);
+		output += CalculatePointLight(N, V, i);
 	}
 
 	output += material.emission;
