@@ -12,8 +12,8 @@
 #include "DirectionalLight.h"
 #include "SpotLight.h"
 
-#include <GL/glew.h>
-#include <GLM/gtc/type_ptr.hpp>
+#include <../glad/include/glad/glad.h>
+#include <../Includes/glm/gtc/type_ptr.hpp>
 
 namespace Beans
 {

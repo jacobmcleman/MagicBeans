@@ -97,7 +97,7 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x86\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WorkStealingJobQueue.lib;glew32s.lib;glfw3.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,7 +119,7 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x64\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WorkStealingJobQueue.lib;glew32s.lib;glfw3.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,7 +143,7 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x86\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WorkStealingJobQueue.lib;glew32s.lib;glfw3.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -169,7 +169,7 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x64\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WorkStealingJobQueue.lib;glew32s.lib;glfw3.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

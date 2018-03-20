@@ -8,7 +8,8 @@
 #include "Transform.h"
 
 #include "InputHandler.h"
-#include "GLFW\glfw3.h"
+
+#include <../SDL2/include/SDL.h>
 
 INIT_REFLECTION(PlayerController)
 
@@ -29,19 +30,19 @@ void PlayerController::Update(double dt)
   //Spin?
   //transform_->rotation += static_cast<float>(dt * 0.5);
 
-  if (InputHandler::IsKeyDown(GLFW_KEY_LEFT))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_LEFT))
   {
     transform_->position += vec3(-dt * speed , 0, 0);
   }
-  if (InputHandler::IsKeyDown(GLFW_KEY_RIGHT))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_RIGHT))
   {
     transform_->position += vec3(dt * speed, 0, 0);
   }
-  if (InputHandler::IsKeyDown(GLFW_KEY_UP))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_UP))
   {
     transform_->position += vec3(0, dt * speed, 0);
   }
-  if (InputHandler::IsKeyDown(GLFW_KEY_DOWN))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_DOWN))
   {
     transform_->position += vec3(0, -dt * speed, 0);
   }

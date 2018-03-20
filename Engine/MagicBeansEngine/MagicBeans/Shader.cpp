@@ -1,7 +1,7 @@
 #include "Shader.h"
 
-#include <GLM/gtc/matrix_transform.hpp>
-#include <GLM/gtc/type_ptr.hpp>
+#include <../Includes/GLM/gtc/matrix_transform.hpp>
+#include <../Includes/GLM/gtc/type_ptr.hpp>
 
 #include "Logger.h"
 #include "Helpers.h"

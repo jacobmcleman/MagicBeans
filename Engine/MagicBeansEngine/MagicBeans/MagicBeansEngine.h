@@ -6,10 +6,7 @@
 #include "GameObject.h"
 #include <functional>
 
-#include "GLM\glm.hpp"
-
-#include "JobForwardDeclarations.h"
-#include "WorkStealingQueue.h"
+#include "..\Includes\glm\glm.hpp"
 
 namespace Beans
 {
@@ -27,8 +24,6 @@ namespace Beans
     void RegisterUpdateFunction(UpdateFunction function);
     void RegisterDrawFunction(DrawFunction function);
 
-    void RegisterUpdateJob(JobFunction job);
-
     GameObject* CreateObject(const std::string& name);
 
     double GetTimeSinceStartup() const;
@@ -41,8 +36,6 @@ namespace Beans
     void DeleteStep();
 
     void SetupRendering();
-
-    static void RunUpdateJobs(Job* job, void* data);
 
     double timeElapsed_;
     WindowManager gameWindow_;
@@ -57,9 +50,6 @@ namespace Beans
     std::vector<DrawFunction> drawFunctions_;
 
     std::vector<UpdateFunction> updateFunctions_;
-    std::vector<JobFunction> updateJobs_;
-
-    
   };
 
 }

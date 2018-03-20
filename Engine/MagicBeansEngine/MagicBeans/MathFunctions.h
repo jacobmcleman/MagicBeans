@@ -1,5 +1,5 @@
 #pragma once
-#include <GLM\glm.hpp>
+#include <..\Includes\GLM\glm.hpp>
 
 template<typename VectorType>
 float MagnitudeSquared(const VectorType& vector)

@@ -4,7 +4,7 @@
 #include "InputHandler.h"
 #include "MathFunctions.h"
 
-#include "GLFW\glfw3.h"
+#include <../SDL2/include/SDL.h>
 
 INIT_REFLECTION(FPSController);
 
@@ -34,22 +34,22 @@ void FPSController::Update(double dt)
   ////////////////////////////////////////
   vec3 vel;
 
-  if (InputHandler::IsKeyDown(GLFW_KEY_UP) || InputHandler::IsKeyDown(GLFW_KEY_W))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_UP) || InputHandler::IsKeyDown(SDL_SCANCODE_W))
   {
     vel = vel + camera_->LookDirection.Get();
     vel.z = 0;
   }
-  if (InputHandler::IsKeyDown(GLFW_KEY_DOWN) || InputHandler::IsKeyDown(GLFW_KEY_S))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_DOWN) || InputHandler::IsKeyDown(SDL_SCANCODE_S))
   {
     vel = vel - camera_->LookDirection.Get();
     vel.z = 0;
   }
-  if (InputHandler::IsKeyDown(GLFW_KEY_LEFT) || InputHandler::IsKeyDown(GLFW_KEY_A))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_LEFT) || InputHandler::IsKeyDown(SDL_SCANCODE_A))
   {
     vel = vel - cross(camera_->LookDirection.Get(), camera_->GlobalUp.Get());
     vel.z = 0;
   }
-  if (InputHandler::IsKeyDown(GLFW_KEY_RIGHT) || InputHandler::IsKeyDown(GLFW_KEY_D))
+  if (InputHandler::IsKeyDown(SDL_SCANCODE_RIGHT) || InputHandler::IsKeyDown(SDL_SCANCODE_D))
   {
     vel = vel + cross(camera_->LookDirection.Get(), camera_->GlobalUp.Get());
     vel.z = 0;

@@ -6,8 +6,8 @@
 
 #include "Logger.h"
 
-#include <GL/glew.h>
-#include <GLM/gtc/type_ptr.hpp>
+#include <../glad/include/glad/glad.h>
+#include <../Includes/GLM/gtc/type_ptr.hpp>
 
 
 namespace Beans

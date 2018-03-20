@@ -9,16 +9,6 @@
 #include "Camera.h"
 #include "JobData.h"
 
-namespace
-{
-  //Struct for the engine to use to send the data to the non-member job function
-  struct EngineRunUpdateJobData
-  {
-    std::vector<JobFunction>* jobs;
-    float dt;
-  };
-}
-
 namespace Beans
 {
   // This is the constructor of a class that has been exported.
@@ -66,11 +56,6 @@ namespace Beans
   void MagicBeansEngine::RegisterDrawFunction(MagicBeansEngine::DrawFunction function)
   {
     drawFunctions_.push_back(function);
-  }
-
-  void MagicBeansEngine::RegisterUpdateJob(JobFunction job)
-  {
-    updateJobs_.push_back(job);
   }
 
   GameObject * MagicBeansEngine::CreateObject(const std::string & name)
@@ -152,20 +137,4 @@ namespace Beans
     Sprite::InitRendering();
     CubeMesh::InitRendering(this);
   }
-
-  void MagicBeansEngine::RunUpdateJobs(Job * job, void * uncast_data)
-  {
-    EngineRunUpdateJobData* data = reinterpret_cast<EngineRunUpdateJobData*>(uncast_data);
-
-    UpdateJobData updateData;
-    updateData.deltaTime = data->dt;
-
-    for (auto jobFunc : *(data->jobs))
-    {
-      job->RunChild(CreateJob(jobFunc, updateData, nullptr));
-    }
-  }
-
-  
-
 }

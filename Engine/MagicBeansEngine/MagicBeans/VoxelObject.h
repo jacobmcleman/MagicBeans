@@ -6,7 +6,7 @@
 
 
 #include <vector>
-#include "GLM\glm.hpp"
+#include "..\Includes\GLM\glm.hpp"
 
 using namespace glm;
 namespace Beans

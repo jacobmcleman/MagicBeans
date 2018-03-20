@@ -1,17 +1,20 @@
 #pragma once
-#include <GLM\glm.hpp>
+#include <..\Includes\glm\glm.hpp>
 using namespace glm;
 
 
-struct GLFWwindow;
-
 namespace Beans
 {
+    enum struct KeyAction
+    {
+        Pressed, Released
+    };
+
   class InputHandler
   {
   public:
-    static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
-    static void MouseCallback(GLFWwindow* window, double xpos, double ypos);
+    static void KeyCallback(int key, int scancode, KeyAction action, int mode);
+    static void MouseCallback(double xpos, double ypos);
     static void UpdateInput();
 
     static bool IsKeyDown(int keycode);

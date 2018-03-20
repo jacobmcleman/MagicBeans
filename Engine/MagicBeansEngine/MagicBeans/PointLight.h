@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "AutoLister.h"
-#include "GLM\glm.hpp"
+#include "../Includes/GLM/glm.hpp"
 
 #include "Shader.h"
 

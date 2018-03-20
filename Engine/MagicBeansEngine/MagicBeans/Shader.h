@@ -5,9 +5,9 @@
 #include <sstream>
 #include <iostream>
 
-#include <GL/glew.h> // Include glew to get all the required OpenGL headers
+#include <../glad/include/glad/glad.h>
 
-#include <GLM\glm.hpp>
+#include <..\Includes\glm\glm.hpp>
 
 namespace Beans
 {

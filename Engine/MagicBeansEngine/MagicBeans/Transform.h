@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
-#include <GLM\glm.hpp>
-#include <GLM\gtc\quaternion.hpp>
+#include <..\includes\GLM\glm.hpp>
+#include <..\includes\GLM\gtc\quaternion.hpp>
 
 using namespace glm;
 

@@ -1,12 +1,8 @@
 #include "WindowManager.h"
 #include "Logger.h"
 
-//GLEW
-#define GLEW_STATIC
-#include <GL/glew.h>
-
-//GLFW
-#include <GLFW/glfw3.h>
+#include <../glad/include/glad/glad.h>
+#include <../SDL2/include/SDL.h>
 
 #include <assert.h>
 #include <iostream>
@@ -19,73 +15,91 @@
 namespace Beans
 {
   WindowManager::WindowManager(const std::string& title, CursorMode cursor, int width, int height) :
-    width_(width), height_(height), lastFrameTime_(0)
+    window_(nullptr),
+    width_(width), height_(height), lastFrameTime_(std::chrono::system_clock::now())
   {
-    LOG("Creating window manager");
-    glfwInit(); //glErrorCheck();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //glErrorCheck();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //glErrorCheck();
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //glErrorCheck();
-		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);//glErrorCheck();
-		glfwWindowHint(GLFW_REFRESH_RATE, GLFW_DONT_CARE);//glErrorCheck();
+    //TODO: Figure out cursor modes in SDL
+      (void)cursor;
 
-    window_ = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+    LOG("Creating window manager");
+
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        LOG("Failed to initialize SDL");
+        throw std::runtime_error("SDL Initialization Failed!");
+    }
+
+    SDL_GL_LoadLibrary(nullptr); //Load default openGL library
+
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+    window_ = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
 
     if (window_ == nullptr)
     {
       LOG("Window creation failed");
+      throw std::runtime_error("Window Creation Failed!");
     }
 
-    glfwMakeContextCurrent(window_);
+    LOG("OpenGL loaded\n");
+    gladLoadGLLoader(SDL_GL_GetProcAddress);
+    LOG(std::string("Vendor:   %s\n") + reinterpret_cast<const char*>(glGetString(GL_VENDOR)))   ;
+    LOG(std::string("Renderer: %s\n") + reinterpret_cast<const char*>(glGetString(GL_RENDERER))) ;
+    LOG(std::string("Version:  %s\n") + reinterpret_cast<const char*>(glGetString(GL_VERSION)))  ;
 
-    glewExperimental = GL_TRUE;
+    //Vysnc on
+    SDL_GL_SetSwapInterval(1);
 
-    glEnable(GL_DEPTH_TEST); glErrorCheck();
-
-    GLenum initResult = glewInit();
-    if (initResult != GLEW_OK)
-    {
-      LOG(((const char*)glewGetErrorString(initResult)));
-    }
-
-    glfwGetFramebufferSize(window_, &width_, &height_);
-
+   
+    SDL_GetWindowSize(window_, &width_, &height_);
     glViewport(0, 0, width_, height_);
-
-    switch (cursor)
-    {
-    case CursorMode::Disabled:
-      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-      break;
-    case CursorMode::Hidden:
-      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-      break;
-    case CursorMode::Normal:
-      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-      break;
-    }
-
-    glfwSetKeyCallback(window_, InputHandler::KeyCallback);
-    glfwSetCursorPosCallback(window_, InputHandler::MouseCallback);
+    glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
 
     LOG("Window created");
   }
 
   WindowManager::~WindowManager()
   {
-    glfwTerminate();
+      SDL_DestroyWindow(window_);
+      SDL_Quit();
   }
 
   bool WindowManager::UpdateWindow()
   {
-    glfwPollEvents();
-    
-    return !glfwWindowShouldClose(window_);
+      bool exit = false;
+      SDL_Event e;
+
+      while (SDL_PollEvent(&e) != 0)
+      {
+          switch(e.type)
+          {
+          case SDL_QUIT:
+              exit = true;
+              break;
+          case SDL_KEYDOWN:
+              //TODO add modifier key handling
+              InputHandler::KeyCallback(e.key.keysym.sym, e.key.keysym.scancode, KeyAction::Pressed, 0);
+              break;
+          case SDL_KEYUP:
+              //TODO add modifier key handling
+              InputHandler::KeyCallback(e.key.keysym.sym, e.key.keysym.scancode, KeyAction::Released, 0);
+              break;
+          case SDL_MOUSEMOTION:
+              InputHandler::MouseCallback(e.motion.x, e.motion.y);
+              break;
+          }
+      }
+
+    return !exit;
   }
 
   void WindowManager::SwapBuffers()
   {
-    glfwSwapBuffers(window_);
+    SDL_GL_SwapWindow(window_);
 
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -95,8 +109,8 @@ namespace Beans
   }
   double WindowManager::GetDeltaTime()
   {
-    double currentFrame = glfwGetTime();
-    double deltaTime = currentFrame - lastFrameTime_;
+    time_point currentFrame = std::chrono::system_clock::now();
+    double deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(currentFrame - lastFrameTime_).count() * 0.000001;
     lastFrameTime_ = currentFrame;
     return deltaTime;
   }
