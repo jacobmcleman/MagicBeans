@@ -47,17 +47,39 @@ namespace Beans
 
     LOG("OpenGL loaded\n");
     gladLoadGLLoader(SDL_GL_GetProcAddress);
-    LOG(std::string("Vendor:   %s\n") + reinterpret_cast<const char*>(glGetString(GL_VENDOR)))   ;
-    LOG(std::string("Renderer: %s\n") + reinterpret_cast<const char*>(glGetString(GL_RENDERER))) ;
-    LOG(std::string("Version:  %s\n") + reinterpret_cast<const char*>(glGetString(GL_VERSION)))  ;
+    
+    SDL_GLContext glContext = SDL_GL_CreateContext(window_);
+    
+    if (glContext == nullptr)
+    {
+        LOG("GL Context creation failed");
+        throw std::runtime_error("GL Context Failed!");
+    }
+
+    LOG(std::string("Vendor:   ") + reinterpret_cast<const char*>(glGetString(GL_VENDOR)))   ;
+    LOG(std::string("Renderer: ") + reinterpret_cast<const char*>(glGetString(GL_RENDERER))) ;
+    LOG(std::string("Version:  ") + reinterpret_cast<const char*>(glGetString(GL_VERSION)))  ;
 
     //Vysnc on
     SDL_GL_SetSwapInterval(1);
 
    
     SDL_GetWindowSize(window_, &width_, &height_);
+
+    if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+    {
+        LOG("Failed to initialize GLAD");
+        throw std::runtime_error("Failed to initialize GLAD");
+    }
+
     glViewport(0, 0, width_, height_);
     glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
+
+    glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_BLEND);
+    glEnable(GL_MULTISAMPLE);
 
     LOG("Window created");
   }

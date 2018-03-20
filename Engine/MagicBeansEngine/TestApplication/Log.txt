@@ -1,6 +1,11 @@
-Startup at Mon Oct  2 23:18:41 2017
-Mon Oct  2 23:18:41 2017  |windowmanager.cpp       (  24)|Beans::WindowManager::WindowManager               |Creating window manager
-Mon Oct  2 23:18:42 2017  |windowmanager.cpp       (  71)|Beans::WindowManager::WindowManager               |Window created
-Mon Oct  2 23:18:42 2017  |sprite.cpp              (  56)|Beans::Sprite::InitRendering                      |Initializing Sprite rendering
-Mon Oct  2 23:18:42 2017  |cubemesh.cpp            (  95)|Beans::CubeMesh::InitRendering                    |Initializing Cube Rendering
-Mon Oct  2 23:18:42 2017  |helpers.cpp             (  28)|GLDebug::glErrorCheck_                            |INVALID_OPERATION | d:\magicbeans\engine\magicbeansengine\magicbeans\cubemesh.cpp (98)
+Startup at Tue Mar 20 02:04:42 2018
+Tue Mar 20 02:04:42 2018  |windowmanager.cpp       (  24)|Beans::WindowManager::WindowManager               |Creating window manager
+Tue Mar 20 02:04:42 2018  |windowmanager.cpp       (  48)|Beans::WindowManager::WindowManager               |OpenGL loaded
+
+Tue Mar 20 02:04:42 2018  |windowmanager.cpp       (  59)|Beans::WindowManager::WindowManager               |Vendor:   NVIDIA Corporation
+Tue Mar 20 02:04:42 2018  |windowmanager.cpp       (  60)|Beans::WindowManager::WindowManager               |Renderer: GeForce GTX 1080/PCIe/SSE2
+Tue Mar 20 02:04:42 2018  |windowmanager.cpp       (  61)|Beans::WindowManager::WindowManager               |Version:  4.6.0 NVIDIA 388.59
+Tue Mar 20 02:04:42 2018  |windowmanager.cpp       (  84)|Beans::WindowManager::WindowManager               |Window created
+Tue Mar 20 02:04:42 2018  |sprite.cpp              (  56)|Beans::Sprite::InitRendering                      |Initializing Sprite rendering
+Tue Mar 20 02:04:42 2018  |cubemesh.cpp            (  95)|Beans::CubeMesh::InitRendering                    |Initializing Cube Rendering
+Tue Mar 20 02:04:42 2018  |helpers.cpp             (  26)|GLDebug::glErrorCheck_                            |INVALID_OPERATION | c:\users\aweso\source\repos\magicbeans\engine\magicbeansengine\magicbeans\cubemesh.cpp (98)
