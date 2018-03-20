@@ -17,32 +17,34 @@ namespace Beans
     protected:
       AutoLister();
       ~AutoLister();
-
-    private:
-      static std::unordered_set<T*> list;
+      static std::unordered_set<T*>& GetListNonConst();
     };
+
+    template<typename T>
+    inline std::unordered_set<T*>& AutoLister<T>::GetListNonConst()
+    {
+      static std::unordered_set<T*> list;
+      return list;
+    }
 
     template<typename T>
     inline const std::unordered_set<T*>& AutoLister<T>::GetList()
     {
-      return list;
+      return GetListNonConst();
     }
 
     template<typename T>
     inline AutoLister<T>::AutoLister()
     {
       //Add this object to the list
-      list.insert(static_cast<T*>(this));
+      GetListNonConst().insert(static_cast<T*>(this));
     }
 
     template<typename T>
     inline AutoLister<T>::~AutoLister()
     {
-      list.erase(static_cast<T*>(this));
+      GetListNonConst().erase(static_cast<T*>(this));
     }
-
-    template<typename T>
-    std::unordered_set<T*> AutoLister<T>::list = std::unordered_set<T*>();
   }
 }
 
