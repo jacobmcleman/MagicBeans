@@ -6,23 +6,25 @@ double Beans::InputHandler::mouse_lastY = 300;
 double Beans::InputHandler::mouse_xMotion = 0;
 double Beans::InputHandler::mouse_yMotion = 0;
 double Beans::InputHandler::mouse_sensitivity = 0.05;
+bool Beans::InputHandler::GotMouseThisFrame = false;
 
 void Beans::InputHandler::KeyCallback(int key, int scancode, KeyAction action, int mods)
 {
   (void)scancode;
   (void)mods;
+  (void)key;
 
   //Just...don't
-  if (key > numKeys_) return;
+  if (scancode > numKeys_) return;
 
   if (action == KeyAction::Pressed)
   {
-    keymap[key / keysPerChar_] |= (1 << ((key % keysPerChar_) * bytesPerKey_));
-    keymap[key / keysPerChar_] |= (1 << (((key % keysPerChar_) * bytesPerKey_) + 1));
+    keymap[scancode / keysPerChar_] |= (1 << ((scancode % keysPerChar_) * bytesPerKey_));
+    keymap[scancode / keysPerChar_] |= (1 << (((scancode % keysPerChar_) * bytesPerKey_) + 1));
   }
   else if (action == KeyAction::Released)
   {
-    keymap[key / keysPerChar_] ^= (1 << (key % keysPerChar_) * bytesPerKey_);
+    keymap[scancode / keysPerChar_] ^= (1 << (scancode % keysPerChar_) * bytesPerKey_);
   }
 }
 
@@ -36,6 +38,8 @@ void Beans::InputHandler::MouseCallback(double xpos, double ypos)
 
   mouse_xMotion = mouse_sensitivity * xChange;
   mouse_yMotion = mouse_sensitivity * yChange;
+
+  GotMouseThisFrame = true;
 }
 
 void Beans::InputHandler::UpdateInput()
@@ -45,6 +49,9 @@ void Beans::InputHandler::UpdateInput()
     //Zero out the triggered bits before starting frame
     keymap[i] &= 0b01010101010101010101010101010101;
   }
+
+  if (!GotMouseThisFrame) mouse_yMotion = mouse_xMotion = 0;
+  GotMouseThisFrame = false;
 }
 
 bool Beans::InputHandler::IsKeyDown(int keycode)
@@ -60,6 +67,11 @@ bool Beans::InputHandler::IsKeyTriggered(int keycode)
 vec2 Beans::InputHandler::GetMouseMotion()
 {
   return vec2((float)mouse_xMotion, (float)mouse_yMotion);
+}
+
+vec2 Beans::InputHandler::GetMousePosition()
+{
+    return vec2((float)mouse_lastX, (float)mouse_lastY);
 }
 
 void Beans::InputHandler::SetMouseSensitivity(double val)

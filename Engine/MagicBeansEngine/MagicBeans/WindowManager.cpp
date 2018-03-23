@@ -18,9 +18,6 @@ namespace Beans
     window_(nullptr),
     width_(width), height_(height), lastFrameTime_(std::chrono::system_clock::now())
   {
-    //TODO: Figure out cursor modes in SDL
-      (void)cursor;
-
     LOG("Creating window manager");
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -38,6 +35,22 @@ namespace Beans
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     window_ = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
+
+    switch (cursor)
+    {
+    case CursorMode::Hidden:
+        SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
+        SDL_CaptureMouse(SDL_bool::SDL_FALSE);
+        break;
+    case CursorMode::Disabled:
+        SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
+        SDL_CaptureMouse(SDL_bool::SDL_TRUE);
+        break;
+    default:
+        SDL_SetRelativeMouseMode(SDL_bool::SDL_FALSE);
+        SDL_CaptureMouse(SDL_bool::SDL_FALSE);
+        break;
+    }
 
     if (window_ == nullptr)
     {

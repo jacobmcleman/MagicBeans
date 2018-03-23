@@ -67,16 +67,14 @@ void FPSController::Update(double dt)
   //    ROTATION
   ////////////////////////////////////////
   vec2 mouseMovement = InputHandler::GetMouseMotion();
+ 
+    if(abs(mouseMovement.x) > 0.05f) yaw_ += mouseMovement.x;
 
-	if (MagnitudeSquared(mouseMovement) > 0.005f)
-	{
-		yaw_ += mouseMovement.x;
-
-
-		if (InvertY) pitch_ += mouseMovement.y;
-		else pitch_ -= mouseMovement.y;
-
-	}
+   if (abs(mouseMovement.y) > 0.05f)
+   {
+       if (InvertY) pitch_ += mouseMovement.y;
+       else pitch_ -= mouseMovement.y;
+   }
 
   if (pitch_ > c_max_pitch_)
   {

@@ -39,9 +39,7 @@ namespace Beans
       InputHandler::UpdateInput();
 
       UpdateStep();
-
       DrawStep();
-
       DeleteStep();
 
       gameWindow_.SwapBuffers();

@@ -21,6 +21,7 @@ namespace Beans
     static bool IsKeyTriggered(int keycode);
 
     static vec2 GetMouseMotion();
+    static vec2 GetMousePosition();
 
     static void SetMouseSensitivity(double val);
 
@@ -33,6 +34,8 @@ namespace Beans
     static constexpr const unsigned int keysPerChar_ = ((sizeof(int) * 8) / bytesPerKey_);
     //Number of characters that need to be in the array to hold enough character data
     static constexpr const unsigned int numChars_ = (numKeys_ / keysPerChar_) + 1;
+
+    static bool GotMouseThisFrame;
 
     static double mouse_lastX;
     static double mouse_lastY;
