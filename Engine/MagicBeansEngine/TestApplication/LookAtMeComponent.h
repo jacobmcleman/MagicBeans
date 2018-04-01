@@ -7,7 +7,7 @@ using namespace Beans;
 class LookAtMe : public Component, protected Utilities::AutoLister<LookAtMe>
 {
 public:
-  REFLECT_CLASS;
+  REFLECT_CLASS(LookAtMe);
 
   LookAtMe(GameObject* owner);
 

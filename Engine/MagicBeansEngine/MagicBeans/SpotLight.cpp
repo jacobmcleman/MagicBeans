@@ -23,7 +23,7 @@ namespace Beans
       uniformName += std::to_string(i);
       uniformName += "].";
 
-      shader->SetUniformVec3f((uniformName + "position").c_str(), light->transform_->position);
+      shader->SetUniformVec3f((uniformName + "position").c_str(), light->transform_->Position);
       shader->SetUniformVec3f((uniformName + "direction").c_str(), light->transform_->GetForwardDirection());
       shader->SetUniformFloat((uniformName + "cutoff").c_str(), light->inner_cutoff);
       shader->SetUniformFloat((uniformName + "outerCutoff").c_str(), light->outer_cutoff);

@@ -86,7 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Headers;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLM_FORCE_CXX11;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -98,7 +98,7 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x86\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
+      <AdditionalDependencies>squirrel.lib;sqratimport.lib;sqratthread.lib;sqstdlib.lib;glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -106,7 +106,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Headers;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>GLM_FORCE_CXX11;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -120,7 +120,7 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x64\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
+      <AdditionalDependencies>squirrel.lib;sqratimport.lib;sqratthread.lib;sqstdlib.lib;glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,7 +130,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Headers;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLM_FORCE_CXX11;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -144,7 +144,7 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x86\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
+      <AdditionalDependencies>squirrel.lib;sqratimport.lib;sqratthread.lib;sqstdlib.lib;glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,7 +154,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Headers;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)WorkStealingJobQueue;</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>GLM_FORCE_CXX11;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -170,13 +170,15 @@
     </ProjectReference>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\Libraries\x64\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glad.lib;SDL2-static.lib;</AdditionalDependencies>
+      <AdditionalDependencies>squirrel.lib;sqratimport.lib;sqratthread.lib;sqstdlib.lib;glad.lib;SDL2-static.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AutoLister.h" />
     <ClInclude Include="BasicShader.h" />
+    <ClInclude Include="Bindable.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ClassName.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeMesh.h" />
     <ClInclude Include="DirectionalLight.h" />
@@ -195,7 +197,6 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SquirrelContext.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="VoxelObject.h" />
     <ClInclude Include="WindowManager.h" />
@@ -216,7 +217,6 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SquirrelContext.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VoxelObject.cpp" />
     <ClCompile Include="WindowManager.cpp" />

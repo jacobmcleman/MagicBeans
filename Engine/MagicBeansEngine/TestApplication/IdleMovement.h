@@ -9,7 +9,7 @@ class IdleMovement : public Component, protected Utilities::AutoLister<IdleMovem
 public:
   IdleMovement(GameObject* owner);
 
-  REFLECT_CLASS;
+  REFLECT_CLASS(IdleMovement);
 
   static void UpdateIdleMovers(double dt);
   void Update(double dt);

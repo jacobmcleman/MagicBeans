@@ -1,9 +1,11 @@
 #include "MetaType.h"
 
+#include "Property.h"
+
 namespace Beans
 {
   namespace Utilities
   {
-    unsigned long MetaType::idCounter = 0;
+    unsigned long long MetaTypeBase::idCounter = 0;
   }
 }

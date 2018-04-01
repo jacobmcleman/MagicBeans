@@ -16,7 +16,7 @@ namespace Beans
   class PointLight : public Component, protected Utilities::AutoLister<PointLight>
   {
   public:
-    REFLECT_CLASS;
+    REFLECT_CLASS(PointLight);
 
     PointLight(GameObject* owner);
     virtual ~PointLight();

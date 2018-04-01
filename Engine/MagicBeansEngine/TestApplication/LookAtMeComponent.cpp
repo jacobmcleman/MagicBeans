@@ -15,7 +15,7 @@ void LookAtMe::SetCamera(Camera * cam)
 
 void LookAtMe::Update(double dt)
 {
-  cam_->LookAt(Owner->GetComponent<Transform>()->position);
+  cam_->LookAt(Owner->GetComponent<Transform>()->Position);
 
   (void)dt;
 }

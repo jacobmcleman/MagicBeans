@@ -120,7 +120,7 @@ namespace Beans
     glErrorCheck();
 
     shaderProgram->SetUniformMat4f("world_to_camera", camTransform);
-    shaderProgram->SetUniformVec3f("viewPos", engine_->GetCamera()->GetComponent<Transform>()->position.Get());
+    shaderProgram->SetUniformVec3f("viewPos", engine_->GetCamera()->GetComponent<Transform>()->Position.Get());
     glErrorCheck();
 
     PointLight::SendLightsToShader(shaderProgram);

@@ -28,7 +28,7 @@ namespace Beans
       uniformName += std::to_string(i);
       uniformName += "].";
 
-      shader->SetUniformVec3f((uniformName + "position").c_str(), light->transform_->position);
+      shader->SetUniformVec3f((uniformName + "position").c_str(), light->transform_->Position);
 
       shader->SetUniformVec3f((uniformName + "ambient").c_str(), light->color * 0.2f);
       shader->SetUniformVec3f((uniformName + "diffuse").c_str(), light->color * 0.8f);

@@ -13,7 +13,7 @@ namespace Beans
     Component(GameObject* owner);
     virtual ~Component() {}
 
-    virtual const Utilities::MetaType& GetMetaType() const = 0;
+    virtual const Utilities::MetaTypeBase& GetMetaType() const = 0;
 
     GameObject * const Owner;
   };

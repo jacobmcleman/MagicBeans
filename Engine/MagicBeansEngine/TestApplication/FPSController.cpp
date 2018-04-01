@@ -10,80 +10,86 @@ INIT_REFLECTION(FPSController);
 
 FPSController::FPSController(GameObject * owner) : Component(owner), speed(30)
 {
-  transform_ = Owner->AddComponent<Transform>();
-  camera_ = Owner->AddComponent<Camera>();
+    transform_ = Owner->AddComponent<Transform>();
+    camera_ = Owner->AddComponent<Camera>();
 
-  yaw_ = 0.0f;
-  pitch_ = 0.0f;
+    yaw_ = 0.0f;
+    pitch_ = 0.0f;
 }
 
 void FPSController::UpdateFPSControllers(double dt)
 {
-  for (auto& toUpdate : GetList())
-  {
-    toUpdate->Update(dt);
-  }
+    for (auto& toUpdate : GetList())
+    {
+        toUpdate->Update(dt);
+    }
 }
 
 void FPSController::Update(double dt)
 {
-  using namespace glm;
+    using namespace glm;
 
-  ////////////////////////////////////////
-  //    MOVEMENT
-  ////////////////////////////////////////
-  vec3 vel;
+    ////////////////////////////////////////
+    //    MOVEMENT
+    ////////////////////////////////////////
+    vec3 vel;
 
-  if (InputHandler::IsKeyDown(SDL_SCANCODE_UP) || InputHandler::IsKeyDown(SDL_SCANCODE_W))
-  {
-    vel = vel + camera_->LookDirection.Get();
-    vel.z = 0;
-  }
-  if (InputHandler::IsKeyDown(SDL_SCANCODE_DOWN) || InputHandler::IsKeyDown(SDL_SCANCODE_S))
-  {
-    vel = vel - camera_->LookDirection.Get();
-    vel.z = 0;
-  }
-  if (InputHandler::IsKeyDown(SDL_SCANCODE_LEFT) || InputHandler::IsKeyDown(SDL_SCANCODE_A))
-  {
-    vel = vel - cross(camera_->LookDirection.Get(), camera_->GlobalUp.Get());
-    vel.z = 0;
-  }
-  if (InputHandler::IsKeyDown(SDL_SCANCODE_RIGHT) || InputHandler::IsKeyDown(SDL_SCANCODE_D))
-  {
-    vel = vel + cross(camera_->LookDirection.Get(), camera_->GlobalUp.Get());
-    vel.z = 0;
-  }
+    if (InputHandler::IsKeyDown(SDL_SCANCODE_UP) || InputHandler::IsKeyDown(SDL_SCANCODE_W))
+    {
+        vel = vel + camera_->LookDirection.Get();
+        vel.z = 0;
+    }
+    if (InputHandler::IsKeyDown(SDL_SCANCODE_DOWN) || InputHandler::IsKeyDown(SDL_SCANCODE_S))
+    {
+        vel = vel - camera_->LookDirection.Get();
+        vel.z = 0;
+    }
+    if (InputHandler::IsKeyDown(SDL_SCANCODE_LEFT) || InputHandler::IsKeyDown(SDL_SCANCODE_A))
+    {
+        vel = vel - cross(camera_->LookDirection.Get(), camera_->GlobalUp.Get());
+        vel.z = 0;
+    }
+    if (InputHandler::IsKeyDown(SDL_SCANCODE_RIGHT) || InputHandler::IsKeyDown(SDL_SCANCODE_D))
+    {
+        vel = vel + cross(camera_->LookDirection.Get(), camera_->GlobalUp.Get());
+        vel.z = 0;
+    }
 
-  if (MagnitudeSquared(vel) > 0)
-  {
-    vel = normalize(vel);
-    vel *= dt * speed;
+    if (MagnitudeSquared(vel) > 0)
+    {
+        vel = normalize(vel);
+        vel *= dt * speed;
 
-    transform_->position += vel;
-  }
+        transform_->Position += vel;
 
-  ////////////////////////////////////////
-  //    ROTATION
-  ////////////////////////////////////////
-  vec2 mouseMovement = InputHandler::GetMouseMotion();
- 
-    if(abs(mouseMovement.x) > 0.05f) yaw_ += mouseMovement.x;
+        vec3 pos = transform_->Position;
+        printf("Position(%f, %f, %f)", pos.x, pos.y, pos.z);
+    }
 
-   if (abs(mouseMovement.y) > 0.05f)
-   {
-       if (InvertY) pitch_ += mouseMovement.y;
-       else pitch_ -= mouseMovement.y;
-   }
+    ////////////////////////////////////////
+    //    ROTATION
+    ////////////////////////////////////////
+    vec2 mouseMovement = InputHandler::GetMouseMotion();
 
-  if (pitch_ > c_max_pitch_)
-  {
-    pitch_ = c_max_pitch_;
-  }
-  else if (pitch_ < -c_max_pitch_)
-  {
-    pitch_ = -c_max_pitch_;
-  }
+    if (abs(mouseMovement.x) > 0.05f) yaw_ += mouseMovement.x;
 
-  camera_->Owner->GetComponent<Transform>()->rotation = vec3(-radians(pitch_), 0, -radians(yaw_));
+    if (abs(mouseMovement.y) > 0.05f)
+    {
+        if (InvertY) pitch_ += mouseMovement.y;
+        else pitch_ -= mouseMovement.y;
+    }
+
+    if (pitch_ > c_max_pitch_)
+    {
+        pitch_ = c_max_pitch_;
+    }
+    else if (pitch_ < -c_max_pitch_)
+    {
+        pitch_ = -c_max_pitch_;
+    }
+
+    camera_->Owner->GetComponent<Transform>()->Rotation = vec3(-radians(pitch_), 0, -radians(yaw_));
+
+    vec3 rot = transform_->Rotation;
+    printf("Rotation<%f, %f, %f>", rot.x, rot.y, rot.z);
 }

@@ -17,7 +17,7 @@ namespace Beans
   class CubeMesh : public Component, protected Utilities::AutoLister<CubeMesh>
   {
   public:
-    REFLECT_CLASS;
+    REFLECT_CLASS(CubeMesh);
 
     CubeMesh(GameObject* owner);
     virtual ~CubeMesh();

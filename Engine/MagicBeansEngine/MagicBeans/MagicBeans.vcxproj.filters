@@ -37,11 +37,8 @@
     <Filter Include="Source Files\Components\Lights">
       <UniqueIdentifier>{8e24659d-afde-4bd3-8ab0-2a139bce2edd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Squirrel">
-      <UniqueIdentifier>{cba6e08c-6785-4465-a94d-efa94ee0fe88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Squirrel">
-      <UniqueIdentifier>{062bb9b2-5081-45b1-b9d8-d7d03dbdf411}</UniqueIdentifier>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{b561a98e-cbe5-4fc6-a94c-0adcb44faa85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,8 +114,11 @@
     <ClInclude Include="MultiDimArray.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="SquirrelContext.h">
-      <Filter>Header Files\Squirrel</Filter>
+    <ClInclude Include="Bindable.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassName.h">
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,9 +135,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MetaType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
@@ -176,8 +173,8 @@
     <ClCompile Include="VoxelObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SquirrelContext.cpp">
-      <Filter>Source Files\Squirrel</Filter>
+    <ClCompile Include="MetaType.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

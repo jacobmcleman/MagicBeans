@@ -16,7 +16,7 @@ namespace Beans
   class DirectionalLight : public Component, protected Utilities::AutoLister<DirectionalLight>
   {
   public:
-    REFLECT_CLASS;
+    REFLECT_CLASS(DirectionalLight);
 
     DirectionalLight(GameObject* owner);
     virtual ~DirectionalLight();

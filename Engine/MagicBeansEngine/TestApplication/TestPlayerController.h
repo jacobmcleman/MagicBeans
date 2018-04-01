@@ -10,7 +10,7 @@ class PlayerController : public Component, public Utilities::AutoLister<PlayerCo
 public:
   PlayerController(GameObject* owner);
 
-  REFLECT_CLASS;
+  REFLECT_CLASS(PlayerController);
 
   static void UpdatePlayerControllers(double dt);
   void Update(double dt);

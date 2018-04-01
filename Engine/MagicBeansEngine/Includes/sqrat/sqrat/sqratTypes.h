@@ -915,7 +915,7 @@ public:
         sq_pop(vm,1);
         v = vm;
         holder = wstring_to_string(string(sv));
-        value = strdup(holder.c_str());
+        value = _strdup(holder.c_str());
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -974,7 +974,7 @@ public:
         sq_pop(vm,1);
         v = vm;
         holder = wstring_to_string(string(sv));
-        value = strdup(holder.c_str());
+        value = _strdup(holder.c_str());
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

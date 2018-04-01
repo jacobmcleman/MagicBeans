@@ -15,7 +15,7 @@ namespace Beans
   class Sprite : public Component, protected Utilities::AutoLister<Sprite>
   {
   public:
-    REFLECT_CLASS;
+    REFLECT_CLASS(Sprite);
 
     Sprite(GameObject* owner);
     virtual ~Sprite();

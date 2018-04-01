@@ -32,19 +32,19 @@ void PlayerController::Update(double dt)
 
   if (InputHandler::IsKeyDown(SDL_SCANCODE_LEFT))
   {
-    transform_->position += vec3(-dt * speed , 0, 0);
+    transform_->Position += vec3(-dt * speed , 0, 0);
   }
   if (InputHandler::IsKeyDown(SDL_SCANCODE_RIGHT))
   {
-    transform_->position += vec3(dt * speed, 0, 0);
+    transform_->Position += vec3(dt * speed, 0, 0);
   }
   if (InputHandler::IsKeyDown(SDL_SCANCODE_UP))
   {
-    transform_->position += vec3(0, dt * speed, 0);
+    transform_->Position += vec3(0, dt * speed, 0);
   }
   if (InputHandler::IsKeyDown(SDL_SCANCODE_DOWN))
   {
-    transform_->position += vec3(0, -dt * speed, 0);
+    transform_->Position += vec3(0, -dt * speed, 0);
   }
 }
 

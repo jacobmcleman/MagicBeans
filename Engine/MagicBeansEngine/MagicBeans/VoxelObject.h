@@ -16,7 +16,7 @@ namespace Beans
   class VoxelObject : public Component, protected Utilities::AutoLister<VoxelObject>
   {
   public:
-    REFLECT_CLASS;
+    REFLECT_CLASS(VoxelObject);
 
     VoxelObject(GameObject* owner);
     virtual ~VoxelObject();

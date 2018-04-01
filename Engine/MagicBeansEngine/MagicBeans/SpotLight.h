@@ -16,7 +16,7 @@ namespace Beans
   class SpotLight : public Component, protected Utilities::AutoLister<SpotLight>
   {
   public:
-    REFLECT_CLASS;
+    REFLECT_CLASS(SpotLight);
 
     SpotLight(GameObject* object);
 

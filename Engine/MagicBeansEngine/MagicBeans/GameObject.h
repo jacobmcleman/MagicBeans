@@ -59,13 +59,13 @@ namespace Beans
       size_t mid;
 
       //The ID of the component type to search for
-      unsigned int searchID = T::MetaInfo.ID;
+      id_t searchID = T::MetaInfo.ID;
 
       //Binary search for component type matching ID in SORTED component list
       while (min < max)
       {
         mid = (min + max) / 2;
-        unsigned int midID = components_[mid]->GetMetaType().ID;
+        id_t midID = components_[mid]->GetMetaType().ID;
 
         if (midID == searchID)
         {
@@ -111,13 +111,13 @@ namespace Beans
     size_t mid;
 
     //The ID of the component type to search for
-    unsigned int searchID = T::MetaInfo.ID;
+    id_t searchID = T::MetaInfo.ID;
 
     //Binary search the component vector for the type matching the ID
     while (min < max)
     {
       mid = (min + max) / 2;
-      unsigned int midID = components_[mid]->GetMetaType().ID;
+      id_t midID = components_[mid]->GetMetaType().ID;
 
       if (midID == searchID)
       {
@@ -143,13 +143,13 @@ namespace Beans
     size_t mid;
 
     //The ID of the component type to search for
-    unsigned int searchID = T::MetaInfo.ID;
+    id_t searchID = T::MetaInfo.ID;
 
     //Binary search for component type matching ID in SORTED component list
     while (min < max)
     {
       mid = (min + max) / 2;
-      unsigned int midID = components_[mid]->GetMetaType().ID;
+      id_t midID = components_[mid]->GetMetaType().ID;
 
       if (midID == searchID)
       {

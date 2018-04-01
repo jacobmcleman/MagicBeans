@@ -56,50 +56,50 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //PlayerController* pc = player1->AddComponent<PlayerController>();
     //LookAtMe* lam = player1->AddComponent<LookAtMe>();
     //lam->SetCamera(testApp.GetCamera()->GetComponent<Camera>());
-    transform->position = glm::vec3(10, 0, floorHeight + (playerScale.z / 2));
-    transform->scale = glm::vec3(10, 10, 10);
+    transform->Position = glm::vec3(10, 0, floorHeight + (playerScale.z / 2));
+    transform->Scale = glm::vec3(10, 10, 10);
     CubeMesh* cube = player1->AddComponent<CubeMesh>();
     cube->material = Material::Gems::Turquoise;
 
     GameObject* floor = testApp.CreateObject("Floor");
     transform = floor->AddComponent<Transform>();
-    transform->position = vec3(0, 0, floorHeight);
-    transform->scale = vec3(roomWidth, roomLength, 1);
+    transform->Position = vec3(0, 0, floorHeight);
+    transform->Scale = vec3(roomWidth, roomLength, 1);
     cube = floor->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
     GameObject* roof = testApp.CreateObject("Roof");
     transform = roof->AddComponent<Transform>();
-    transform->position = vec3(0, 0, ceilingHeight);
-    transform->scale = vec3(roomWidth, roomLength, 1);
+    transform->Position = vec3(0, 0, ceilingHeight);
+    transform->Scale = vec3(roomWidth, roomLength, 1);
     cube = roof->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
     GameObject* southWall = testApp.CreateObject("South Wall");
     transform = southWall->AddComponent<Transform>();
-    transform->position = vec3(0, -0.5f * roomLength, wallCenter);
-    transform->scale = vec3(roomWidth, wallThickness, roomHeight);
+    transform->Position = vec3(0, -0.5f * roomLength, wallCenter);
+    transform->Scale = vec3(roomWidth, wallThickness, roomHeight);
     cube = southWall->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
     GameObject* westWall = testApp.CreateObject("West Wall");
     transform = westWall->AddComponent<Transform>();
-    transform->position = vec3(-0.5f * roomWidth, 0, wallCenter);
-    transform->scale = vec3(wallThickness, roomLength, roomHeight);
+    transform->Position = vec3(-0.5f * roomWidth, 0, wallCenter);
+    transform->Scale = vec3(wallThickness, roomLength, roomHeight);
     cube = westWall->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
     GameObject* eastWall = testApp.CreateObject("East Wall");
     transform = eastWall->AddComponent<Transform>();
-    transform->position = vec3(0.5f * roomWidth, 0, wallCenter);
-    transform->scale = vec3(wallThickness, roomLength, roomHeight);
+    transform->Position = vec3(0.5f * roomWidth, 0, wallCenter);
+    transform->Scale = vec3(wallThickness, roomLength, roomHeight);
     cube = eastWall->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
     GameObject* lightA = testApp.CreateObject("LightA");
     transform = lightA->AddComponent<Transform>();
-    transform->position = vec3(0.25f * roomWidth, 0, wallCenter);
-    transform->scale = vec3(3, 3, 3);
+    transform->Position = vec3(0.25f * roomWidth, 0, wallCenter);
+    transform->Scale = vec3(3, 3, 3);
     PointLight* light = lightA->AddComponent<PointLight>();
     light->color = vec3(1, 0, 0);
     light->power = 5;
@@ -112,8 +112,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameObject* lightB = testApp.CreateObject("LightB");
     transform = lightB->AddComponent<Transform>();
-    transform->position = vec3(-0.25f * roomWidth, 0, wallCenter);
-    transform->scale = vec3(3, 3, 3);
+    transform->Position = vec3(-0.25f * roomWidth, 0, wallCenter);
+    transform->Scale = vec3(3, 3, 3);
     light = lightB->AddComponent<PointLight>();
     light->power = 2;
     light->color = vec3(0, 1, 0);
@@ -126,8 +126,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameObject* lightC = testApp.CreateObject("LightC");
     transform = lightC->AddComponent<Transform>();
-    transform->position = vec3(0, 0.25f * roomLength, wallCenter);
-    transform->scale = vec3(3, 3, 3);
+    transform->Position = vec3(0, 0.25f * roomLength, wallCenter);
+    transform->Scale = vec3(3, 3, 3);
     light = lightC->AddComponent<PointLight>();
     light->power = 7;
     light->color = vec3(0, 0, 1);
@@ -140,8 +140,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameObject* floor2 = testApp.CreateObject("Floor");
     transform = floor2->AddComponent<Transform>();
-    transform->position = vec3(0, roomLength * 1.5f, floorHeight);
-    transform->scale = vec3(roomWidth, roomLength * 2, 1);
+    transform->Position = vec3(0, roomLength * 1.5f, floorHeight);
+    transform->Scale = vec3(roomWidth, roomLength * 2, 1);
     cube = floor2->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
@@ -152,8 +152,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 #define PLACE_MATERIAL_SAMPLE(mat, category) \
     GameObject* mat##Cube = testApp.CreateObject( #mat ); \
     transform = mat##Cube->AddComponent<Transform>(); \
-    transform->position = vec3(roomWidth * 0.3f, roomLength * 0.8f + curLinePos, 2); \
-    transform->scale = vec3(materialSampleSize, materialSampleSize, materialSampleSize); \
+    transform->Position = vec3(roomWidth * 0.3f, roomLength * 0.8f + curLinePos, 2); \
+    transform->Scale = vec3(materialSampleSize, materialSampleSize, materialSampleSize); \
     curLinePos += materialSampleSpacing; \
     cube = mat##Cube->AddComponent<CubeMesh>(); \
     cube->material = Material::##category##::##mat 
@@ -185,8 +185,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameObject* lightD = testApp.CreateObject("LightD");
     transform = lightD->AddComponent<Transform>();
-    transform->position = vec3(0, roomLength, wallCenter + 5);
-    transform->scale = vec3(3, 3, 3);
+    transform->Position = vec3(0, roomLength, wallCenter + 5);
+    transform->Scale = vec3(3, 3, 3);
     light = lightD->AddComponent<PointLight>();
     light->power = 100;
     light->color = vec3(1, 1, 1);
@@ -199,15 +199,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameObject* floor3 = testApp.CreateObject("Floor");
     transform = floor3->AddComponent<Transform>();
-    transform->position = vec3(roomWidth * 1.5f, roomLength * 1.5f, floorHeight);
-    transform->scale = vec3(roomWidth * 2, roomLength * 2, 1);
+    transform->Position = vec3(roomWidth * 1.5f, roomLength * 1.5f, floorHeight);
+    transform->Scale = vec3(roomWidth * 2, roomLength * 2, 1);
     cube = floor3->AddComponent<CubeMesh>();
     cube->material = roomMat;
 
     GameObject* spotLight = testApp.CreateObject("Spotlight");
     transform = spotLight->AddComponent<Transform>();
-    transform->position = vec3(roomWidth * 0.8f, roomLength * 0.8f, ceilingHeight * 2);
-    transform->rotation = vec3(radians(-45.0f), 0, radians(-45.0f));
+    transform->Position = vec3(roomWidth * 0.8f, roomLength * 0.8f, ceilingHeight * 2);
+    transform->Rotation = vec3(radians(-45.0f), 0, radians(-45.0f));
     SpotLight* spotlight = spotLight->AddComponent<SpotLight>();
     spotlight->color = vec3(1.0f, 1.0f, 0.8f);
     spotlight->inner_cutoff = 0.9f;
@@ -220,25 +220,25 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {
       GameObject* snowmanBodyA = testApp.CreateObject("Snowman Lower Body");
       transform = snowmanBodyA->AddComponent<Transform>();
-      transform->position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 5.5f);
-      transform->rotation = vec3(0, 0, radians(-30.0f));
-      transform->scale = vec3(10, 10, 10);
+      transform->Position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 5.5f);
+      transform->Rotation = vec3(0, 0, radians(-30.0f));
+      transform->Scale = vec3(10, 10, 10);
       cube = snowmanBodyA->AddComponent<CubeMesh>();
       cube->material = Material::Metals::Gold;
 
       GameObject* snowmanBodyB = testApp.CreateObject("Snowman Mid Body");
       transform = snowmanBodyB->AddComponent<Transform>();
-      transform->position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 13.0f);
-      transform->rotation = vec3(0, 0, radians(-30.0f));
-      transform->scale = vec3(7.5f, 7.5f, 7.5f);
+      transform->Position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 13.0f);
+      transform->Rotation = vec3(0, 0, radians(-30.0f));
+      transform->Scale = vec3(7.5f, 7.5f, 7.5f);
       cube = snowmanBodyB->AddComponent<CubeMesh>();
       cube->material = Material::Metals::Gold;
 
       GameObject* snowmanBodyC = testApp.CreateObject("Snowman Top Body");
       transform = snowmanBodyC->AddComponent<Transform>();
-      transform->position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 18.0f);
-      transform->rotation = vec3(0, 0, radians(-30.0f));
-      transform->scale = vec3(5, 5, 5);
+      transform->Position = vec3(roomWidth * 1.3f, roomLength * 1.3f, floorHeight + 18.0f);
+      transform->Rotation = vec3(0, 0, radians(-30.0f));
+      transform->Scale = vec3(5, 5, 5);
       cube = snowmanBodyC->AddComponent<CubeMesh>();
       cube->material = Material::Metals::Gold;
     }
@@ -246,15 +246,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameObject* sun = testApp.CreateObject("Sun");
     transform = sun->AddComponent<Transform>();
-    transform->position = vec3(0, 0, 50);
-    transform->rotation = vec3(radians(-60.0f), 0, radians(-60.0f));
+    transform->Position = vec3(0, 0, 50);
+    transform->Rotation = vec3(radians(-60.0f), 0, radians(-60.0f));
     DirectionalLight* dirLight = sun->AddComponent<DirectionalLight>();
     dirLight->color = vec3(1, 1, 1);
     dirLight->power = 0.05f;
     
     //transform->rotation = 4.0f;
     GameObject* cam = testApp.GetCamera();
-    cam->GetComponent<Transform>()->position = vec3(0, 0, wallCenter);
+    cam->GetComponent<Transform>()->Position = vec3(0, 0, wallCenter);
     cam->AddComponent<FPSController>();
 
     testApp.RunGameLoop();

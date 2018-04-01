@@ -1,6 +1,10 @@
 // MagicBeansEngine.cpp : Defines the exported functions for the static library.
 //
 
+#pragma warning(disable: 4244 4458 4127 4702)
+#include <sqrat\sqrat.h>
+#pragma warning(default: 4244 4458 4127 4702)
+
 #include "MagicBeansEngine.h"
 #include "Logger.h"
 #include "InputHandler.h"
@@ -11,128 +15,130 @@
 
 namespace Beans
 {
-  // This is the constructor of a class that has been exported.
-  // see MagicBeansEngine.h for the class definition
-  MagicBeansEngine::MagicBeansEngine(const std::string& gamename, CursorMode cursorMode) :
-    gameWindow_(gamename, cursorMode, 1920, 1080), cameraObject_(nullptr), timeElapsed_(0)
-  {
-    /*
-      Use the default constructor for workers which will automatically
-      use all of the threads in the machine
-    */
-
-    //Automatically register sprite's draw functions
-    RegisterDrawFunction(Sprite::DrawSprites);
-    RegisterDrawFunction(CubeMesh::DrawSprites);
-
-    SetupRendering();
-
-    cameraObject_ = CreateObject("Main Camera");
-    cameraObject_->AddComponent<Transform>();
-    cameraObject_->AddComponent<Camera>();
-  }
-
-  void MagicBeansEngine::RunGameLoop()
-  {
-    while (gameWindow_.UpdateWindow())
+    // This is the constructor of a class that has been exported.
+    // see MagicBeansEngine.h for the class definition
+    MagicBeansEngine::MagicBeansEngine(const std::string& gamename, CursorMode cursorMode) :
+        gameWindow_(gamename, cursorMode, 1920, 1080), cameraObject_(nullptr), timeElapsed_(0)
     {
-      InputHandler::UpdateInput();
+        /*
+          Use the default constructor for workers which will automatically
+          use all of the threads in the machine
+        */
 
-      UpdateStep();
-      DrawStep();
-      DeleteStep();
+        Sqrat::DefaultVM::Set(sq_open(2048));
 
-      gameWindow_.SwapBuffers();
-    }
-  }
+        //Automatically register sprite's draw functions
+        RegisterDrawFunction(Sprite::DrawSprites);
+        RegisterDrawFunction(CubeMesh::DrawSprites);
 
-  void MagicBeansEngine::RegisterUpdateFunction(MagicBeansEngine::UpdateFunction function)
-  {
-    updateFunctions_.push_back(function);
-  }
+        SetupRendering();
 
-  void MagicBeansEngine::RegisterDrawFunction(MagicBeansEngine::DrawFunction function)
-  {
-    drawFunctions_.push_back(function);
-  }
-
-  GameObject * MagicBeansEngine::CreateObject(const std::string & name)
-  {
-    objects_.emplace_back(new GameObject(name));
-    return objects_.back();
-  }
-
-  double MagicBeansEngine::GetTimeSinceStartup() const
-  {
-    return timeElapsed_;
-  }
-
-  GameObject * MagicBeansEngine::GetCamera()
-  {
-    return cameraObject_;
-  }
-
-  void MagicBeansEngine::UpdateStep()
-  {
-    double dt = gameWindow_.GetDeltaTime();
-    timeElapsed_ += dt;
-
-    ////Start all currently registered update jobs
-    //EngineRunUpdateJobData updateJobData;
-    //updateJobData.dt = static_cast<float>(dt);
-    //updateJobData.jobs = &updateJobs_;
-    //
-    ////Start the execution of the update jobs
-    //Job* updateJob = CreateJob(RunUpdateJobs, updateJobData);
-    //workers_.Run(updateJob);
-
-    //Call all currently registered synchronus update functions
-    for (MagicBeansEngine::UpdateFunction func : updateFunctions_)
-    {
-      func(dt);
+        cameraObject_ = CreateObject("Main Camera");
+        cameraObject_->AddComponent<Transform>();
+        cameraObject_->AddComponent<Camera>();
     }
 
-    //Wait for the update jobs to be finished
-   // workers_.Wait(updateJob);
-  }
-
-  void MagicBeansEngine::DrawStep()
-  {
-    if (cameraObject_ != nullptr)
+    void MagicBeansEngine::RunGameLoop()
     {
-      Camera* cam = cameraObject_->GetComponent<Camera>();
-      if (cam != nullptr)
-      {
-        cam->UpdateMatrix();
-
-        //Call all currently registered update functions
-        for (MagicBeansEngine::DrawFunction func : drawFunctions_)
+        while (gameWindow_.UpdateWindow())
         {
-          func(cam->GetMatrix());
+            InputHandler::UpdateInput();
+
+            UpdateStep();
+            DrawStep();
+            DeleteStep();
+
+            gameWindow_.SwapBuffers();
         }
-      }
     }
-    
-  }
 
-  void MagicBeansEngine::DeleteStep()
-  {
-    //Find all objects to delete
-    for (int i = 0; i < objects_.size(); ++i)
+    void MagicBeansEngine::RegisterUpdateFunction(MagicBeansEngine::UpdateFunction function)
     {
-      if (objects_[i]->isMarkedForDelete())
-      {
-        std::swap(objects_[i], objects_.back());
-        GameObject* deleted = objects_.back();
-        objects_.pop_back();
-        delete deleted;
-      }
+        updateFunctions_.push_back(function);
     }
-  }
 
-  void MagicBeansEngine::SetupRendering()
-  {
-    Sprite::InitRendering();
-    CubeMesh::InitRendering(this);
-  }
+    void MagicBeansEngine::RegisterDrawFunction(MagicBeansEngine::DrawFunction function)
+    {
+        drawFunctions_.push_back(function);
+    }
+
+    GameObject * MagicBeansEngine::CreateObject(const std::string & name)
+    {
+        objects_.emplace_back(new GameObject(name));
+        return objects_.back();
+    }
+
+    double MagicBeansEngine::GetTimeSinceStartup() const
+    {
+        return timeElapsed_;
+    }
+
+    GameObject * MagicBeansEngine::GetCamera()
+    {
+        return cameraObject_;
+    }
+
+    void MagicBeansEngine::UpdateStep()
+    {
+        double dt = gameWindow_.GetDeltaTime();
+        timeElapsed_ += dt;
+
+        ////Start all currently registered update jobs
+        //EngineRunUpdateJobData updateJobData;
+        //updateJobData.dt = static_cast<float>(dt);
+        //updateJobData.jobs = &updateJobs_;
+        //
+        ////Start the execution of the update jobs
+        //Job* updateJob = CreateJob(RunUpdateJobs, updateJobData);
+        //workers_.Run(updateJob);
+
+        //Call all currently registered synchronus update functions
+        for (MagicBeansEngine::UpdateFunction func : updateFunctions_)
+        {
+            func(dt);
+        }
+
+        //Wait for the update jobs to be finished
+       // workers_.Wait(updateJob);
+    }
+
+    void MagicBeansEngine::DrawStep()
+    {
+        if (cameraObject_ != nullptr)
+        {
+            Camera* cam = cameraObject_->GetComponent<Camera>();
+            if (cam != nullptr)
+            {
+                cam->UpdateMatrix();
+
+                //Call all currently registered update functions
+                for (MagicBeansEngine::DrawFunction func : drawFunctions_)
+                {
+                    func(cam->GetMatrix());
+                }
+            }
+        }
+
+    }
+
+    void MagicBeansEngine::DeleteStep()
+    {
+        //Find all objects to delete
+        for (int i = 0; i < objects_.size(); ++i)
+        {
+            if (objects_[i]->isMarkedForDelete())
+            {
+                std::swap(objects_[i], objects_.back());
+                GameObject* deleted = objects_.back();
+                objects_.pop_back();
+                delete deleted;
+            }
+        }
+    }
+
+    void MagicBeansEngine::SetupRendering()
+    {
+        Sprite::InitRendering();
+        CubeMesh::InitRendering(this);
+    }
 }

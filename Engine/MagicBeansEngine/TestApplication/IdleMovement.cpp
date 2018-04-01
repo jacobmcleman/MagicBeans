@@ -26,5 +26,5 @@ void IdleMovement::Update(double dt)
   offset.y = moveMagnitude.y * sinf(moveFrequency.y * 2 * pi<float>() * timer_);
   offset.z = moveMagnitude.z * sinf(moveFrequency.z * 2 * pi<float>() * timer_);
 
-  transform_->position = basePosition + offset;
+  transform_->Position = basePosition + offset;
 }

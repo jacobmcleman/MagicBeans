@@ -10,7 +10,7 @@ class FPSController : public Component, protected Utilities::AutoLister<FPSContr
 public:
   FPSController(GameObject* owner);
 
-  REFLECT_CLASS;
+  REFLECT_CLASS(FPSController);
 
   static void UpdateFPSControllers(double dt);
   void Update(double dt);
