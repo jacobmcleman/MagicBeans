@@ -9,6 +9,11 @@ namespace Beans
 {
     class Camera : public Component, public Bindable<Camera>
     {
+    private:
+        mat4 matrix_;
+        vec3 globalUp_;
+        vec3 lookDirection_;
+
     public:
         Camera(GameObject* owner);
 
@@ -28,10 +33,5 @@ namespace Beans
         vec3 GetGlobalUp() const;
         const vec3& SetLookDirection(const vec3&);
         vec3 GetLookDirection() const;
-
-    private:
-        mat4 matrix_;
-        vec3 globalUp_;
-        vec3 lookDirection_;
     };
 }
