@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Components\Lights">
       <UniqueIdentifier>{8e24659d-afde-4bd3-8ab0-2a139bce2edd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Squirrel">
+      <UniqueIdentifier>{cba6e08c-6785-4465-a94d-efa94ee0fe88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Squirrel">
+      <UniqueIdentifier>{062bb9b2-5081-45b1-b9d8-d7d03dbdf411}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowManager.h">
@@ -111,6 +117,9 @@
     <ClInclude Include="MultiDimArray.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="SquirrelContext.h">
+      <Filter>Header Files\Squirrel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MagicBeansEngine.cpp">
@@ -166,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="VoxelObject.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SquirrelContext.cpp">
+      <Filter>Source Files\Squirrel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

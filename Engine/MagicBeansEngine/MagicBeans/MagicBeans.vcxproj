@@ -76,6 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)\Includes\Squirrel;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)EngineBuild\$(Platform)\$(Configuration)\</OutDir>
@@ -194,6 +195,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SquirrelContext.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="VoxelObject.h" />
     <ClInclude Include="WindowManager.h" />
@@ -214,6 +216,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SquirrelContext.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VoxelObject.cpp" />
     <ClCompile Include="WindowManager.cpp" />
