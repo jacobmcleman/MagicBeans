@@ -1,11 +1,11 @@
-Startup at Sun Apr  1 15:50:15 2018
-Sun Apr  1 15:50:15 2018  |windowmanager.cpp       (  21)|Beans::WindowManager::WindowManager               |Creating window manager
-Sun Apr  1 15:50:16 2018  |windowmanager.cpp       (  61)|Beans::WindowManager::WindowManager               |OpenGL loaded
+Startup at Wed Apr  4 13:15:24 2018
+Wed Apr  4 13:15:24 2018  |windowmanager.cpp       (  21)|Beans::WindowManager::WindowManager               |Creating window manager
+Wed Apr  4 13:15:25 2018  |windowmanager.cpp       (  61)|Beans::WindowManager::WindowManager               |OpenGL loaded
 
-Sun Apr  1 15:50:16 2018  |windowmanager.cpp       (  72)|Beans::WindowManager::WindowManager               |Vendor:   NVIDIA Corporation
-Sun Apr  1 15:50:16 2018  |windowmanager.cpp       (  73)|Beans::WindowManager::WindowManager               |Renderer: GeForce GTX 1080/PCIe/SSE2
-Sun Apr  1 15:50:16 2018  |windowmanager.cpp       (  74)|Beans::WindowManager::WindowManager               |Version:  4.6.0 NVIDIA 388.59
-Sun Apr  1 15:50:16 2018  |windowmanager.cpp       (  97)|Beans::WindowManager::WindowManager               |Window created
-Sun Apr  1 15:50:16 2018  |sprite.cpp              (  56)|Beans::Sprite::InitRendering                      |Initializing Sprite rendering
-Sun Apr  1 15:50:16 2018  |cubemesh.cpp            (  95)|Beans::CubeMesh::InitRendering                    |Initializing Cube Rendering
-Sun Apr  1 15:50:16 2018  |helpers.cpp             (  26)|GLDebug::glErrorCheck_                            |INVALID_OPERATION | c:\users\aweso\source\repos\magicbeans\engine\magicbeansengine\magicbeans\cubemesh.cpp (98)
+Wed Apr  4 13:15:25 2018  |windowmanager.cpp       (  72)|Beans::WindowManager::WindowManager               |Vendor:   NVIDIA Corporation
+Wed Apr  4 13:15:25 2018  |windowmanager.cpp       (  73)|Beans::WindowManager::WindowManager               |Renderer: GeForce GTX 1080/PCIe/SSE2
+Wed Apr  4 13:15:25 2018  |windowmanager.cpp       (  74)|Beans::WindowManager::WindowManager               |Version:  4.6.0 NVIDIA 388.59
+Wed Apr  4 13:15:25 2018  |windowmanager.cpp       (  97)|Beans::WindowManager::WindowManager               |Window created
+Wed Apr  4 13:15:25 2018  |sprite.cpp              (  56)|Beans::Sprite::InitRendering                      |Initializing Sprite rendering
+Wed Apr  4 13:15:25 2018  |cubemesh.cpp            (  95)|Beans::CubeMesh::InitRendering                    |Initializing Cube Rendering
+Wed Apr  4 13:15:25 2018  |helpers.cpp             (  26)|GLDebug::glErrorCheck_                            |INVALID_OPERATION | c:\users\aweso\source\repos\magicbeans\engine\magicbeansengine\magicbeans\cubemesh.cpp (98)

@@ -26,6 +26,20 @@ namespace Beans
         static const char* sName;
     };
 
+    template<class BindClass, class BaseClass>
+    class BindableDerived
+    {
+    public:
+        //Make sure first use is with the name
+        static Sqrat::DerivedClass<BindClass, BaseClass>& GetSquirrelClass()
+        {
+            static Sqrat::DerivedClass<BindClass, BaseClass> bindClass(Sqrat::DefaultVM::Get(), sName);
+            return bindClass;
+        }
+
+        static const char* sName;
+    };
+
     template<class BindClass>
     const char* Bindable<BindClass>::sName = BindClass::MetaInfo.Name.c_str();
     //const char* Bindable<BindClass>::sName = ClassName<BindClass>();

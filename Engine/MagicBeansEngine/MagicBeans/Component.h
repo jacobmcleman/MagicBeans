@@ -5,16 +5,18 @@
 
 namespace Beans
 {
-  class GameObject;
+    class GameObject;
 
-  class Component
-  {
-  public:
-    Component(GameObject* owner);
-    virtual ~Component() {}
+    class Component
+    {
+    public:
+        Component(GameObject* owner);
+        virtual ~Component() {}
 
-    virtual const Utilities::MetaTypeBase& GetMetaType() const = 0;
+        virtual const Utilities::MetaTypeBase& GetMetaType() const = 0;
 
-    GameObject * const Owner;
-  };
+        GameObject * const Owner;
+
+        static const char* sName;
+    };
 }
